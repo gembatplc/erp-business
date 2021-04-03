@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,4 @@ Route::get('/home',
  [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
- Route::get('/test',function(){
-     return "testing perpose";
- });
+ Route::get('/department',Department::class);
