@@ -8,6 +8,6 @@ class Department extends Component
 {
     public function render()
     {
-        return view('livewire.department');
+        return view('livewire.department')->extends('layouts.app');
     }
 }
