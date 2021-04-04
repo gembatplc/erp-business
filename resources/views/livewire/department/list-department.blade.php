@@ -1,7 +1,7 @@
 <div>
     <div class="x_panel">
         <div class="x_title">
-          <h2>Table design <small>Custom design</small></h2>
+          <h2>Department List</h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -19,9 +19,20 @@
         </div>
   
         <div class="x_content">
-  
-          <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>
-  
+          <div class="clearfix mb-2">
+              <div class="float-left">
+                  <select wire:model="per_page" class="form-control form-control-sm" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+                      <option value="10">10</option>
+                      <option value="10">20</option>
+                      <option value="10">50</option>
+                      <option value="10">100</option>
+                  </select>
+              </div>
+              <div class="float-right">
+                  <input wire:model="search" class="form-control form-control-sm" placeholder="Search any keywords" type="text"  style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+              </div>
+          </div>
+             
           <div class="table-responsive">
             <table class="table  table-striped jambo_table bulk_action">
               <thead>
@@ -34,9 +45,7 @@
                   <th class="column-title">Created Date</th>
                   <th class="column-title no-link last"><span class="nobr">Action</span>
                   </th>
-                  <th class="bulk-actions" colspan="7">
-                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                  </th>
+                  
                 </tr>
               </thead>
   
@@ -58,11 +67,11 @@
                   @endforeach
               </tbody>
             </table>
-            <div class="d-flex justify-content->between">
-                <div class="float-right">
-                    Showing 1 to 10 of 20 departments
+            <div class="clearfix">
+                <div class="float-left">
+                    Showing {{ $departments->firstItem() }} to {{ $departments->lastItem() }} of {{ $departments->total() }} departments
                 </div>
-                <div class="">
+                <div class="float-right">
                     {{ $departments->links() }}
                 </div>
                 
