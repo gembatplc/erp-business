@@ -15,6 +15,7 @@
     @include('layouts.styles')
     <!-- /styles -->
 
+    @livewireStyles
   </head>
 
   <body class="nav-md">
@@ -49,6 +50,6 @@
     <!-- scripts -->
     @include('layouts.scripts')
     <!-- scripts -->
-
+    @livewireScripts
   </body>
 </html>

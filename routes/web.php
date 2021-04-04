@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Livewire\Department;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Department\Department;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +31,5 @@ Route::get('/home',
 
 
  Route::get('/department',Department::class);
+
+
