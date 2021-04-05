@@ -20,6 +20,7 @@
 
  <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
 <style>
     .disabled-link{
         pointer-events: none;
