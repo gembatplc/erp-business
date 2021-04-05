@@ -33,7 +33,7 @@
           </ul>
           <div class="clearfix"></div>
         </div>
-  
+
         <div class="x_content">
 
           <div class="clearfix mb-2">
@@ -53,7 +53,7 @@
                 <!-- /serach option query search -->
               </div>
           </div>
-             
+
           <div class="table-responsive">
             <table class="table  table-striped jambo_table bulk_action">
               <thead>
@@ -66,16 +66,16 @@
                   <th class="column-title">Created Date</th>
                   <th class="column-title no-link last"><span class="nobr">Action</span>
                   </th>
-                  
+
                 </tr>
               </thead>
-  
+
               <tbody>
-                  @foreach ($departments as $department)
-                    <tr class="even pointer @if($bulkSelectAll == 1) selected @elseif(in_array($department->id,$bulk_select)) selected  @endif"  wire:loading.remove wire:target="per_page,search,goto_page,next_page,previous_page">
+                  @forelse ($departments as $department)
+                    <tr class="even pointer @if($bulkSelectAll == 1) selected @elseif(in_array($department->id,$bulk_select)) selected  @endif"  wire:loading.remove wire:target="per_page,search,goto_page,next_page,previous_page,deleteItem">
                     <td class="a-center">
                         <input type="checkbox" id="check_item{{ $department->id }}" @if($bulkSelectAll == 1) checked @endif  wire:model="bulk_select" value="{{ $department->id }}">
-                        
+
                     </td>
                     <td class=" ">{{ $department->name }}</td>
                     <td class=" ">{{ $department->description == null ? '--' : $department->description}}</td>
@@ -85,10 +85,18 @@
                         <a href="javascript:void(0)" wire:click="$set('delete_id',{{ $department->id }})" data-toggle="modal" data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
                     </td>
                     </tr>
-                  @endforeach
-                  <tr wire:loading wire:target="per_page,search,goto_page,previous_page,next_page">
-                    <td colspan="5" class="text-center">Loading..</td>
-                  </tr>
+                    @empty
+                    <tr wire:loading.remove wire:target="per_page,search">
+                        <td colspan="5" style="text-align: center;color:#ca4444;">Department has Empty</td>
+                    </tr>
+                  @endforelse
+                    <tr wire:loading wire:target="per_page,search,goto_page,previous_page,next_page,deleteItem">
+                        <td colspan="5" class="mx-auto" style="text-align: center; color:#ca4444;">
+                            <div class="spinner-border text-danger spinner-border-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div> Loading...
+                        </td>
+                    </tr>
               </tbody>
               <tfoot>
                 <tr class="headings" style="background: rgba(52,73,94,0.94); color:white;">
@@ -100,7 +108,7 @@
                   <th class="column-title">Created Date</th>
                   <th class="column-title no-link last"><span class="nobr">Action</span>
                   </th>
-                  
+
                 </tr>
               </tfoot>
             </table>
@@ -120,8 +128,8 @@
               <a href="javascript:void(0)" class="@if($bulk_select == []) disabled-link @endif"><i class="fa fa-file-excel-o text-primary"></i> Export</a>
             </div>
           </div>
-  
-  
+
+
         </div>
     </div>
 
@@ -159,7 +167,7 @@
             </button>
           </div>
           <div class="modal-body">
-            
+
 
             @if($edit_department_id != null || $edit_department_id != 0 || $edit_department_id != '')
               <div class="form-group animate__fadeInDown">
@@ -176,12 +184,21 @@
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
               </div>
-            @endif 
+            @endif
 
           </div>
           <div class="modal-footer">
             @if($edit_department_id != null || $edit_department_id != 0 || $edit_department_id != '')
-            <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_department_id }}')">Save changes</button>
+            <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_department_id }}')">
+                <span wire:loading wire:target="updateItem">
+                    <div class="spinner-border text-danger spinner-border-sm" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    Loading...
+                </span>
+                <span wire:loading.remove wire:target="updateItem">Save Changes</span>
+
+            </button>
             @endif
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
@@ -203,7 +220,7 @@
              </button>
            </div>
            <div class="modal-body">
-             @if($edit_departments != [] || $edit_departments != null) 
+             @if($edit_departments != [] || $edit_departments != null)
              @foreach ($edit_departments as $edit_department)
              <div class="form-group animate__fadeInDown">
                   <label class="font-weight-bold">Title</label>

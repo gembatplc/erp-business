@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Position extends Model
+class Designation extends Model
 {
     use HasFactory;
 
-    protected $table = 'positions';
-    protected $fillable = ['name','description'];
+    protected $table = 'designations';
+    protected $fillable = ['name', 'description'];
 
     /**
      * Get all of the employees for the Position
