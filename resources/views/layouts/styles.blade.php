@@ -20,5 +20,9 @@
 
  <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+<style>
+    .disabled-link{
+        pointer-events: none;
+    }
+</style>
 @stack('style')

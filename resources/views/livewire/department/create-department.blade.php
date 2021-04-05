@@ -11,26 +11,34 @@
             <div class="clearfix"></div>
           </div>
         <div class="card-body">
+            
             @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+              <div class="alert alert-success alert-dismissible " role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <strong>Done!</strong> {{ session('success') }}
+              </div>
+              @endif
 
-            @if (session()->has('error'))
-                <div class="alert alert-error">
-                    {{ session('error') }}
-                </div>
-            @endif
+              @if (session()->has('error'))
+              <div class="alert alert-danger alert-dismissible " role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <strong>Holy guacamole!</strong> {{ session('error') }}
+              </div>
+              @endif
+
             <form  wire:submit.prevent="add">
                 <div class="form-group">
-                    <input class="form-control" wire:model.lazy="name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+                    <label class="font-weight-bold">Title</label>
+                    <input class="form-control" placeholder="Title" wire:model.lazy="name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
                     @error('name')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" wire:model.lazy="description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+                    <label class="font-weight-bold">Description</label>
+                    <textarea class="form-control" placeholder="description" wire:model.lazy="description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
                     @error('description')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
