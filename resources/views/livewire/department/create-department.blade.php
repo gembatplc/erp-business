@@ -11,7 +11,7 @@
             <div class="clearfix"></div>
           </div>
         <div class="card-body">
-            
+
             @if (session()->has('success'))
               <div class="alert alert-success alert-dismissible " role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -46,7 +46,10 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-success btn-sm">
                         <span wire:loading wire:target="add">
-                            Processing..
+                            <div class="spinner-border text-danger spinner-border-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Loading...
                         </span>
                         <span wire:loading.remove wire:target="add">
                             Add Department
