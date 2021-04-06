@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Department;
 
 use Livewire\Component;
 use App\Models\Department;
+use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
 class ListDepartment extends Component
@@ -27,6 +28,8 @@ class ListDepartment extends Component
     public $edit_department_description;
 
     public $edit_departments = [];
+
+    public $edit_department_multi_name = [];
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -109,6 +112,9 @@ class ListDepartment extends Component
     public function editItems()
     {
         $this->edit_departments = Department::whereIn('id',$this->bulk_select)->get();
+        foreach($this->edit_departments as $department){
+            $this->edit_department = $department;
+        }
     }
 
 
@@ -130,6 +136,12 @@ class ListDepartment extends Component
                 session()->flash('error','Something went to wrong!!,Please try agian');
             }
         }
+    }
+
+
+    public function multipleItemUpdate(Request $request)
+    {
+        dd($request->get('name'));
     }
 
 

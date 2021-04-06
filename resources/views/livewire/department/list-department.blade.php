@@ -134,6 +134,9 @@
     </div>
 
 
+
+
+
     <!-- modals for delete confimation --->
     <!-- confimation modal -->
     <div class="modal fade" wire:ignore.self id="delete-confirmation" tabindex="-1" role="dialog" aria-hidden="true">
@@ -221,28 +224,31 @@
            </div>
            <div class="modal-body">
              @if($edit_departments != [] || $edit_departments != null)
+         
              @foreach ($edit_departments as $edit_department)
              <div class="form-group animate__fadeInDown">
                   <label class="font-weight-bold">Title</label>
-                  <input class="form-control" placeholder="Title" value="{{ $edit_department->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+                  <input class="form-control" wire:model="edit_department_multi_name" placeholder="Title" value="{{ $edit_department->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
                   @error('name')
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
               </div>
+               @json($edit_department_multi_name)
               <div class="form-group animate__fadeInDown">
                   <label class="font-weight-bold">Description</label>
-                  <textarea class="form-control" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_department->description !!}</textarea>
+                  <textarea class="form-control" name="description[]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_department->description !!}</textarea>
                   @error('description')
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
               </div>
               <hr style="height: 4px; background:#b77d7d;">
              @endforeach
+            
              @endif
            </div>
            <div class="modal-footer">
              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             <button type="button" class="btn btn-primary">Save changes</button>
+             <button type="button" class="btn btn-primary" wire:click="multipleItemUpdate">Save changes</button>
            </div>
 
          </div>

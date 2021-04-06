@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Branch\Branch;
 use App\Http\Livewire\Department\Department;
 use App\Http\Livewire\Designation\Designation;
 
@@ -33,5 +34,6 @@ Route::get('/home',
 
  Route::get('/department',Department::class)->middleware('auth');
  Route::get('/designation',Designation::class)->middleware('auth');
+ Route::get('/branch',Branch::class)->middleware('auth');
 
 
