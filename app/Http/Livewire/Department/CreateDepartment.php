@@ -12,7 +12,7 @@ class CreateDepartment extends Component
     public $status;
 
     protected $rules = [
-        'name' => 'required|min:2|max:255',
+        'name' => 'required|min:2|max:255|unique:departments,name',
         'description' => 'nullable|max:255',
     ];
 
@@ -33,6 +33,8 @@ class CreateDepartment extends Component
             session()->flash('error', 'Something went to wrong!! Please Try again.');
         }
     }
+
+    
     public function render()
     {
         return view('livewire.department.create-department');
