@@ -32,6 +32,6 @@ Route::get('/home',
 
 
  Route::get('/department',Department::class);
- Route::get('/brand',Brand::class);
+//  Route::get('/brand',Brand::class);
 
 
