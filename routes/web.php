@@ -24,7 +24,6 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-
 Auth::routes();
 
 Route::get('/home',
@@ -32,6 +31,6 @@ Route::get('/home',
 
 
  Route::get('/department',Department::class);
-//  Route::get('/brand',Brand::class);
+ Route::get('/brand',Brand::class);
 
 
