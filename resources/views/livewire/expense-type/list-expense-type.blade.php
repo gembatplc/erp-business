@@ -17,7 +17,7 @@
 
         @endif
   <div class="x_title">
-    <h2>Designation List</h2>
+    <h2>Expense Type List</h2>
     <ul class="nav navbar-right panel_toolbox">
       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
       </li>
@@ -71,22 +71,23 @@
         </thead>
 
         <tbody>
-            @forelse ($designations as $designation)
-              <tr class="even pointer @if($bulkSelectAll == 1) selected @elseif(in_array($designation->id,$bulk_select)) selected  @endif"  wire:loading.remove wire:target="per_page,search,goto_page,next_page,previous_page,deleteItem">
+            @forelse ($expenseTypes as $expenseType)
+              <tr class="even pointer @if($bulkSelectAll == 1) selected @elseif(in_array($expenseType->id,$bulk_select)) selected  @endif"  wire:loading.remove wire:target="per_page,search,goto_page,next_page,previous_page,deleteItem">
               <td class="a-center">
-                  <input type="checkbox" id="check_item{{ $designation->id }}" @if($bulkSelectAll == 1) checked @endif  wire:model="bulk_select" value="{{ $designation->id }}">
+                  <input type="checkbox" id="check_item{{ $expenseType->id }}" @if($bulkSelectAll == 1) checked @endif  wire:model="bulk_select" value="{{ $expenseType->id }}">
+
               </td>
-              <td class=" ">{{ $designation->name }}</td>
-              <td class=" ">{{ $designation->description == null ? '--' : $designation->description}}</td>
-              <td class=" ">{{ $designation->updated_at->diffForHumans() }}</td>
+              <td class=" ">{{ $expenseType->name }}</td>
+              <td class=" ">{{ $expenseType->description == null ? '--' : $expenseType->description}}</td>
+              <td class=" ">{{ $expenseType->created_at->diffForHumans() }}</td>
               <td class="d-flex">
-                  <a href="javascript:void(0)" wire:click="editItem('{{ $designation->id }}')" class="mr-2" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil text-info"></i> Edit</a>
-                  <a href="javascript:void(0)" wire:click="$set('delete_id',{{ $designation->id }})" data-toggle="modal" data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
+                  <a href="javascript:void(0)" wire:click="editItem('{{ $expenseType->id }}')" class="mr-2" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil text-info"></i> Edit</a>
+                  <a href="javascript:void(0)" wire:click="$set('delete_id',{{ $expenseType->id }})" data-toggle="modal" data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
               </td>
               </tr>
               @empty
               <tr wire:loading.remove wire:target="per_page,search">
-                  <td colspan="5" style="text-align: center;color:#ca4444;">Designation has Empty</td>
+                  <td colspan="5" style="text-align: center;color:#ca4444;">Expense Type has Empty</td>
               </tr>
             @endforelse
               <tr wire:loading wire:target="per_page,search,goto_page,previous_page,next_page,deleteItem">
@@ -113,10 +114,10 @@
       </table>
       <div class="clearfix">
           <div class="float-left">
-              Showing {{ $designations->firstItem() }} to {{ $designations->lastItem() }} of {{ $designations->total() }} designations
+              Showing {{ $expenseTypes->firstItem() }} to {{ $expenseTypes->lastItem() }} of {{ $expenseTypes->total() }} Expense Types
           </div>
           <div class="float-right">
-              {{ $designations->links() }}
+              {{ $expenseTypes->links() }}
           </div>
       </div>
       <div class="d-flex mt-2">
@@ -131,6 +132,9 @@
 
   </div>
 </div>
+
+
+
 
 
 <!-- modals for delete confimation --->
@@ -155,31 +159,31 @@
 <!-- /modals for delete confimation -->
 
 
-<!-- designation editable item -->
+<!-- expenseType editable item -->
 <div class="modal fade" wire:ignore.self id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
 
     <div class="modal-header">
-      <h4 class="modal-title" id="myModalLabel">Edit Designation</h4>
-      <button type="button" wire:click="$set('edit_designation_id',null)"  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+      <h4 class="modal-title" id="myModalLabel">Edit Expense Type</h4>
+      <button type="button" wire:click="$set('edit_expenseType_id',null)"  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
       </button>
     </div>
     <div class="modal-body">
 
 
-      @if($edit_designation_id != null || $edit_designation_id != 0 || $edit_designation_id != '')
+      @if($edit_expenseType_id != null || $edit_expenseType_id != 0 || $edit_expenseType_id != '')
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" placeholder="Title" wire:model.lazy="edit_designation_name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('edit_designation_name')
+            <input class="form-control" placeholder="Title" wire:model.lazy="edit_expenseType_name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            @error('edit_expenseType_name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" placeholder="" wire:model.lazy="edit_designation_description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
-            @error('edit_designation_description')
+            <textarea class="form-control" placeholder="" wire:model.lazy="edit_expenseType_description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+            @error('edit_expenseType_description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
@@ -187,8 +191,8 @@
 
     </div>
     <div class="modal-footer">
-      @if($edit_designation_id != null || $edit_designation_id != 0 || $edit_designation_id != '')
-      <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_designation_id }}')">
+      @if($edit_expenseType_id != null || $edit_expenseType_id != 0 || $edit_expenseType_id != '')
+      <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_expenseType_id }}')">
           <span wire:loading wire:target="updateItem">
               <div class="spinner-border text-danger spinner-border-sm" role="status">
                   <span class="sr-only">Loading...</span>
@@ -199,13 +203,13 @@
 
       </button>
       @endif
-      <button type="button" wire:click="$set('edit_designation_id',null)" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" wire:click="$set('edit_expenseType_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
 
   </div>
 </div>
 </div>
-<!-- /designation editable item -->
+<!-- /expenseType editable item -->
 
 <!-- Large modal -->
 
@@ -214,34 +218,37 @@
    <div class="modal-content">
 
      <div class="modal-header">
-       <h4 class="modal-title" id="myModalLabel">Edit ({{ count($bulk_select) }}) Designations</h4>
+       <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Expense Types</h4>
        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
        </button>
      </div>
      <div class="modal-body">
-       @if($edit_designations != [] || $edit_designations != null)
-       @foreach ($edit_designations as $edit_designation)
+       @if($edit_expenseTypes != [] || $edit_expenseTypes != null)
+   
+       @foreach ($edit_expenseTypes as $edit_expenseType)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" placeholder="Title" value="{{ $edit_designation->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            <input class="form-control" wire:model="edit_expenseType_multi_name" placeholder="Title" value="{{ $edit_expenseType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
             @error('name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
+         @json($edit_expenseType_multi_name)
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_designation->description !!}</textarea>
+            <textarea class="form-control" name="description[]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_expenseType->description !!}</textarea>
             @error('description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
         <hr style="height: 4px; background:#b77d7d;">
        @endforeach
+      
        @endif
      </div>
      <div class="modal-footer">
        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-       <button type="button" class="btn btn-primary">Save changes</button>
+       <button type="button" class="btn btn-primary" wire:click="multipleItemUpdate">Save changes</button>
      </div>
 
    </div>

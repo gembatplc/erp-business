@@ -176,14 +176,14 @@
               <div class="form-group animate__fadeInDown">
                   <label class="font-weight-bold">Title</label>
                   <input class="form-control" placeholder="Title" wire:model.lazy="edit_department_name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-                  @error('name')
+                  @error('edit_department_name')
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
               </div>
               <div class="form-group animate__fadeInDown">
                   <label class="font-weight-bold">Description</label>
                   <textarea class="form-control" placeholder="" wire:model.lazy="edit_department_description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
-                  @error('description')
+                  @error('edit_department_description')
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
               </div>

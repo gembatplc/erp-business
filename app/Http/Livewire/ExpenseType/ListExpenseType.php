@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Livewire\Branch;
+namespace App\Http\Livewire\ExpenseType;
 
-use App\Models\Branch;
+use App\Models\ExpenseType;
 use Livewire\Component;
-use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
-class ListBranch extends Component
+class ListExpenseType extends Component
 {
 
     use WithPagination;
-    protected $listeners = ['refreshBranch' => '$refresh'];
+    protected $listeners = ['refreshExpenseType' => '$refresh'];
     protected $paginationTheme = 'bootstrap';
     
     public $search;
@@ -24,14 +23,13 @@ class ListBranch extends Component
     public $delete_id = null;
     public $delete_single_item = true;
 
-    public $edit_branch_id = null;
-    public $edit_branch_name;
-    public $edit_branch_location;
-    public $edit_branch_description;
+    public $edit_expenseType_id = null;
+    public $edit_expenseType_name;
+    public $edit_expenseType_description;
 
-    public $edit_branchs = [];
+    public $edit_expenseTypes = [];
 
-    public $edit_branch_multi_name = [];
+    public $edit_expenseType_multi_name = [];
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -40,9 +38,8 @@ class ListBranch extends Component
 
 
     protected $rules = [
-        'edit_branch_name' => 'required|min:2|max:255',
-        'edit_branch_location' => 'nullable|min:2|max:255',
-        'edit_branch_description' => 'nullable|max:255',
+        'edit_expenseType_name' => 'required|min:2|max:255',
+        'edit_expenseType_description' => 'nullable|max:255',
     ];
 
 
@@ -54,7 +51,7 @@ class ListBranch extends Component
     public function updatedBulkSelectAll($value)
     {
         if($value){
-            $this->bulk_select = Branch::pluck('id');
+            $this->bulk_select = ExpenseType::pluck('id');
         }else{
             $this->bulk_select = [];
         }
@@ -67,9 +64,9 @@ class ListBranch extends Component
                 session()->flash('error','Something went to wrong!!,Please try agian');
 
             }else{
-                Branch::find($this->delete_id)->delete();
-                session()->flash('success','Branch Item has been successfully Deleted!!');
-                $this->emit('refreshBranch');
+                ExpenseType::find($this->delete_id)->delete();
+                session()->flash('success','ExpenseType Item has been successfully Deleted!!');
+                $this->emit('refreshExpenseType');
                 $this->delete_id = null;
             }
         }else{
@@ -77,9 +74,9 @@ class ListBranch extends Component
                 session()->flash('error','Something went to wrong!!,Please try agian.');
 
             }else{
-                Branch::destroy($this->bulk_select);
-                session()->flash('success','Branch Items has been successfully Deleted!!');
-                $this->emit('refreshBranch');
+                ExpenseType::destroy($this->bulk_select);
+                session()->flash('success','ExpenseType Items has been successfully Deleted!!');
+                $this->emit('refreshExpenseType');
                 $this->bulk_select = [];
             }
         }    
@@ -87,26 +84,28 @@ class ListBranch extends Component
     }
 
 
+
+
     public function editItem($id)
     {
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
-            $branch = Branch::find($id);
-            $this->edit_branch_id = $branch->id;
-            $this->edit_branch_name = $branch->name;
-            $this->edit_branch_location = $branch->location;
-            $this->edit_branch_description = $branch->description;
+            $expenseType = ExpenseType::find($id);
+            $this->edit_expenseType_id = $expenseType->id;
+            $this->edit_expenseType_name = $expenseType->name;
+            $this->edit_expenseType_description = $expenseType->description;
         }
         
     }
 
 
+    
     public function editItems()
     {
-        $this->edit_branchs = Branch::whereIn('id',$this->bulk_select)->get();
-        foreach($this->edit_branchs as $branch){
-            $this->edit_branch = $branch;
+        $this->edit_expenseTypes = ExpenseType::whereIn('id',$this->bulk_select)->get();
+        foreach($this->edit_expenseTypes as $expenseType){
+            $this->edit_expenseType = $expenseType;
         }
     }
 
@@ -115,19 +114,17 @@ class ListBranch extends Component
     public function updateItem($id)
     {
         $this->validate([
-            "edit_branch_name" => "required|min:2|max:255|unique:branches,name,$id",
+            'edit_expenseType_name' => "required|min:2|max:255|unique:expense_types,name,$id"
         ]);
-        
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
-            $branch = Branch::find($id);
-            $branch->name = $this->edit_branch_name;
-            $branch->location = $this->edit_branch_location;
-            $branch->description = $this->edit_branch_description;
-            if($branch->update()){
-                session()->flash('success','Branch Items has been successfully updated!!');
-                $this->emit('refreshBranch');
+            $expenseType = ExpenseType::find($id);
+            $expenseType->name = $this->edit_expenseType_name;
+            $expenseType->description = $this->edit_expenseType_description;
+            if($expenseType->update()){
+                session()->flash('success','ExpenseType Items has been successfully updated!!');
+                $this->emit('refreshExpenseType');
                 // $this->edit_department_id = null;
             }else{
                 session()->flash('error','Something went to wrong!!,Please try agian');
@@ -135,15 +132,18 @@ class ListBranch extends Component
         }
     }
 
+
     public function multipleItemUpdate(Request $request)
     {
         dd($request->get('name'));
     }
 
 
+
+    
     public function render()
     {
-        $branchs = Branch::latest()->where('name', 'like', '%'.$this->search.'%')->paginate($this->per_page);
-        return view('livewire.branch.list-branch',['branchs' => $branchs]);
+        $expenseTypes = ExpenseType::latest()->where('name', 'like', '%'.$this->search.'%')->paginate($this->per_page);
+        return view('livewire.expense-type.list-expense-type',['expenseTypes' => $expenseTypes]);
     }
 }

@@ -101,7 +101,10 @@ class ListDesignation extends Component
 
     public function updateItem($id)
     {
-        $this->validate();
+        $this->validate([
+            "edit_designation_name" => "required|min:2:max:255|unique:designations,name,$id",
+        ]);
+
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
