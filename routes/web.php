@@ -2,6 +2,7 @@
 
 
 use Illuminate\Http\Request;
+use App\Http\Livewire\Brand\Brand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Department\Department;
@@ -31,5 +32,6 @@ Route::get('/home',
 
 
  Route::get('/department',Department::class);
+ Route::get('/brand',Brand::class);
 
 
