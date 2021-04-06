@@ -4,8 +4,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Department\Department;
-
+use App\Http\Livewire\Designation\Designation;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::get('/home',
  [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
- Route::get('/department',Department::class);
+ Route::get('/department',Department::class)->middleware('auth');
+ Route::get('/designation',Designation::class)->middleware('auth');
 
 

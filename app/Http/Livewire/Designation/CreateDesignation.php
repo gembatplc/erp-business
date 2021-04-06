@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Department;
+namespace App\Http\Livewire\Designation;
 
-use App\Models\Department;
 use Livewire\Component;
+use App\Models\Designation;
 
-class CreateDepartment extends Component
+class CreateDesignation extends Component
 {
     public $name;
     public $description;
@@ -22,21 +22,21 @@ class CreateDepartment extends Component
 
     public function add(){
         $this->validate();
-        $department = new Department();
-        $department->name = $this->name;
-        $department->description = $this->description;
-        if($department->save()){
-            session()->flash('success', 'Department successfully created.');
-            $this->emit('refreshDepartment');
+        $designation = new Designation();
+        $designation->name = $this->name;
+        $designation->description = $this->description;
+        if($designation->save()){
+            session()->flash('success', 'Designation successfully created.');
+            $this->emit('refreshDesignation');
             $this->reset();
         }else{
             session()->flash('error', 'Something went to wrong!! Please Try again.');
         }
     }
 
-    
+
     public function render()
     {
-        return view('livewire.department.create-department');
+        return view('livewire.designation.create-designation');
     }
 }

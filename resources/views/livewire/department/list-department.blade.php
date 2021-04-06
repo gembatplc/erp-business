@@ -141,7 +141,7 @@
         <div class="modal-content">
 
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+            <button type="button" wire:click="$set('delete_id',null)" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
             </button>
           </div>
           <div class="modal-body">
@@ -163,7 +163,7 @@
 
           <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel">Edit Department</h4>
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            <button type="button" wire:click="$set('edit_department_id',null)"  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
           </div>
           <div class="modal-body">
@@ -200,7 +200,7 @@
 
             </button>
             @endif
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" wire:click="$set('edit_department_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
 
         </div>
