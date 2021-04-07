@@ -17,7 +17,7 @@
 
         @endif
   <div class="x_title">
-    <h2>Leave Type List</h2>
+    <h2>Category List</h2>
     <ul class="nav navbar-right panel_toolbox">
       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
       </li>
@@ -62,7 +62,7 @@
               <input type="checkbox" wire:model="bulkSelectAll">
             </th>
             <th class="column-title">Name <i class="fas fa-sort-alpha-up-alt"></i></th>
-            <th class="column-title">Maximum Leave</th>
+            <th class="column-title">parent</th>
             <th class="column-title">Created Date</th>
             <th class="column-title no-link last"><span class="nobr">Action</span>
             </th>
@@ -71,23 +71,23 @@
         </thead>
 
         <tbody>
-            @forelse ($leaveTypes as $leaveType)
-              <tr class="even pointer @if($bulkSelectAll == 1) selected @elseif(in_array($leaveType->id,$bulk_select)) selected  @endif"  wire:loading.remove wire:target="per_page,search,goto_page,next_page,previous_page,deleteItem">
+            @forelse ($categories as $category)
+              <tr class="even pointer @if($bulkSelectAll == 1) selected @elseif(in_array($category->id,$bulk_select)) selected  @endif"  wire:loading.remove wire:target="per_page,search,goto_page,next_page,previous_page,deleteItem">
               <td class="a-center">
-                  <input type="checkbox" id="check_item{{ $leaveType->id }}" @if($bulkSelectAll == 1) checked @endif  wire:model="bulk_select" value="{{ $leaveType->id }}">
+                  <input type="checkbox" id="check_item{{ $category->id }}" @if($bulkSelectAll == 1) checked @endif  wire:model="bulk_select" value="{{ $category->id }}">
 
               </td>
-              <td class=" ">{{ $leaveType->name }}</td>
-              <td class=" ">{{ $leaveType->max_leave_count}} on {{ $leaveType->leave_count_interval }}</td>
-              <td class=" ">{{ $leaveType->created_at->diffForHumans() }}</td>
+              <td class=" ">{{ $category->name }}</td>
+              <td class=" ">{{ $category->parent == null ? '--' : $category->parent->name}}</td>
+              <td class=" ">{{ $category->created_at->diffForHumans() }}</td>
               <td class="d-flex">
-                  <a href="javascript:void(0)" wire:click="editItem('{{ $leaveType->id }}')" class="mr-2" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil text-info"></i> Edit</a>
-                  <a href="javascript:void(0)" wire:click="$set('delete_id',{{ $leaveType->id }})" data-toggle="modal" data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
+                  <a href="javascript:void(0)" wire:click="editItem('{{ $category->id }}')" class="mr-2" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil text-info"></i> Edit</a>
+                  <a href="javascript:void(0)" wire:click="$set('delete_id',{{ $category->id }})" data-toggle="modal" data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
               </td>
               </tr>
               @empty
               <tr wire:loading.remove wire:target="per_page,search">
-                  <td colspan="5" style="text-align: center;color:#ca4444;">Leave Type has Empty</td>
+                  <td colspan="5" style="text-align: center;color:#ca4444;">Category has Empty</td>
               </tr>
             @endforelse
               <tr wire:loading wire:target="per_page,search,goto_page,previous_page,next_page,deleteItem">
@@ -104,7 +104,7 @@
               {{-- <input type="checkbox" wire:model="bulkSelectAll"> --}}
             </th>
             <th class="column-title">Name <i class="fas fa-sort-alpha-up-alt"></i></th>
-            <th class="column-title">Maximum Leave</th>
+            <th class="column-title">Parent</th>
             <th class="column-title">Created Date</th>
             <th class="column-title no-link last"><span class="nobr">Action</span>
             </th>
@@ -114,10 +114,10 @@
       </table>
       <div class="clearfix">
           <div class="float-left">
-              Showing {{ $leaveTypes->firstItem() }} to {{ $leaveTypes->lastItem() }} of {{ $leaveTypes->total() }} leaveTypes
+              Showing {{ $categories->firstItem() }} to {{ $categories->lastItem() }} of {{ $categories->total() }} categorys
           </div>
           <div class="float-right">
-              {{ $leaveTypes->links() }}
+              {{ $categories->links() }}
           </div>
       </div>
       <div class="d-flex mt-2">
@@ -159,54 +159,45 @@
 <!-- /modals for delete confimation -->
 
 
-<!-- leaveType editable item -->
+<!-- category editable item -->
 <div class="modal fade" wire:ignore.self id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
 
     <div class="modal-header">
-      <h4 class="modal-title" id="myModalLabel">Edit Leave Type</h4>
-      <button type="button" wire:click="$set('edit_leaveType_id',null)"  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+      <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
+      <button type="button" wire:click="$set('edit_category_id',null)"  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
       </button>
     </div>
     <div class="modal-body">
 
 
-      @if($edit_leaveType_id != null || $edit_leaveType_id != 0 || $edit_leaveType_id != '')
+      @if($edit_category_id != null || $edit_category_id != 0 || $edit_category_id != '')
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" placeholder="Title" wire:model.lazy="edit_leaveType_name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('edit_leaveType_name')
-              <span class="text-danger" role="alert">{{$message}}</span>
-            @enderror
-        </div>
-
-        <div class="form-group animate__fadeInDown">
-            <label class="font-weight-bold">Maximum Leave Count</label>
-            <input class="form-control" placeholder="Title" wire:model.lazy="edit_leaveType_max_leave_count" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('edit_leaveType_max_leave_count')
+            <input class="form-control" placeholder="Title" wire:model.lazy="edit_category_name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            @error('edit_category_name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
 
         <div class="form-group">
-            <label class="font-weight-bold">Leave Count Interval</label>
-            <select class="form-control" placeholder="Location" wire:model="edit_leaveType_leave_count_interval" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
-                <option value="monthly">Monthly</option>
-                <option value="weekly">Weekly</option>
-                <option value="biweekly">Biweekly</option>
-                <option value="yearly">Yearly</option>
+            <label class="font-weight-bold">Parent Category</label>
+            <select class="form-control" wire:model="edit_category_parent_id" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
+                <option value="null">----</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
             </select>
-        
-            @error('edit_leaveType_leave_count_interval')
+            @error('parent_id')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
 
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" placeholder="" wire:model.lazy="edit_leaveType_description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
-            @error('edit_leaveType_description')
+            <textarea class="form-control" placeholder="" wire:model.lazy="edit_category_description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+            @error('edit_category_description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
@@ -214,8 +205,8 @@
 
     </div>
     <div class="modal-footer">
-      @if($edit_leaveType_id != null || $edit_leaveType_id != 0 || $edit_leaveType_id != '')
-      <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_leaveType_id }}')">
+      @if($edit_category_id != null || $edit_category_id != 0 || $edit_category_id != '')
+      <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_category_id }}')">
           <span wire:loading wire:target="updateItem">
               <div class="spinner-border text-danger spinner-border-sm" role="status">
                   <span class="sr-only">Loading...</span>
@@ -226,13 +217,13 @@
 
       </button>
       @endif
-      <button type="button" wire:click="$set('edit_leaveType_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" wire:click="$set('edit_category_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
 
   </div>
 </div>
 </div>
-<!-- /leaveType editable item -->
+<!-- /category editable item -->
 
 <!-- Large modal -->
 
@@ -241,60 +232,46 @@
    <div class="modal-content">
 
      <div class="modal-header">
-       <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Leave Types</h4>
+       <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Categorys</h4>
        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
        </button>
      </div>
      <div class="modal-body">
-         @json($edit_leaveTypes)
-       @if($edit_leaveTypes != [] || $edit_leaveTypes != null)
-       <form method="POST" action="{{ route('testing') }}">
-        @csrf
-       @foreach ($edit_leaveTypes as $key => $edit_leaveType)
+       @if($edit_categories != [] || $edit_categories != null)
+   
+       @foreach ($edit_categories as $edit_category)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" value="{{ $edit_leaveType->name }}" name="name[{{ $edit_leaveType->id }}]" placeholder="Title" value="{{ $edit_leaveType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            <input class="form-control" wire:model="edit_category_multi_name" placeholder="Title" value="{{ $edit_category->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
             @error('name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
-         {{ $edit_leaveType_multi_name }}
-        <div class="form-group animate__fadeInDown">
-            <label class="font-weight-bold">Maximum Leave Count</label>
-            <input class="form-control"  name="max_count[{{ $edit_leaveType->id }}]" value="{{ $edit_leaveType->max_leave_count }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('name')
-              <span class="text-danger" role="alert">{{$message}}</span>
-            @enderror
-        </div>
-
 
         <div class="form-group">
-            <label class="font-weight-bold">Leave Count Interval</label>
-            <select class="form-control" name="leave_interval[{{ $edit_leaveType->id }}]" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
-                <option value="monthly" @if($edit_leaveType->leave_count_interval == 'monthly') selected @endif>Monthly</option>
-                <option value="weekly"  @if($edit_leaveType->leave_count_interval == 'weekly') selected @endif>Weekly</option>
-                <option value="biweekly"  @if($edit_leaveType->leave_count_interval == 'biweekly') selected @endif>Biweekly</option>
-                <option value="yearly"  @if($edit_leaveType->leave_count_interval == 'yearly') selected @endif>Yearly</option>
-            </select>
-        
-            @error('edit_leaveType_leave_count_interval')
-              <span class="text-danger" role="alert">{{$message}}</span>
-            @enderror
-        </div>
-        
+          <label class="font-weight-bold">Parent Category</label>
+          <select class="form-control"  style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
+              <option value="null">----</option>
+              @foreach ($categories as $category)
+                  <option value="{{ $category->id }}" @if($edit_category->id == $category->id) selected @endif>{{ $category->name }}</option>
+              @endforeach
+          </select>
+          @error('parent_id')
+            <span class="text-danger" role="alert">{{$message}}</span>
+          @enderror
+      </div>
 
-         @json($edit_leaveType_multi_name)
+         @json($edit_category_multi_name)
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" name="description[{{ $edit_leaveType->id }}]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_leaveType->description !!}</textarea>
+            <textarea class="form-control" name="description[]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_category->description !!}</textarea>
             @error('description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
         <hr style="height: 4px; background:#b77d7d;">
        @endforeach
-        <button type="submit" class="btn btn-primary">Save</button>
-       </form>
+      
        @endif
      </div>
      <div class="modal-footer">
@@ -306,3 +283,4 @@
  </div>
 </div>
 </div>
+
