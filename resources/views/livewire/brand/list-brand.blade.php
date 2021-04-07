@@ -142,7 +142,7 @@
                     <a href="javascript:void(0)" wire:click="$set('delete_single_item',false)"
                         class="mr-3 @if($bulk_select == []) disabled-link @endif" data-toggle="modal"
                         data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
-                    <a href="javascript:void(0)" class="@if($bulk_select == []) disabled-link @endif"><i
+                    <a href="javascript:void(0)" wire:click="exportItems" class="@if($bulk_select == []) disabled-link @endif"><i
                             class="fa fa-file-excel-o text-primary"></i> Export</a>
                 </div>
             </div>

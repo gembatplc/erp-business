@@ -140,6 +140,22 @@ class ListExpenseType extends Component
 
 
 
+    public function exportItems()
+    {
+        if($this->bulk_select == [] || $this->bulk_select == '' || $this->bulk_select == null){
+            session()->flash('error','Something went to wrong!!,Please try agian.');
+
+        }else{
+            return response()->streamDownload(function(){
+                echo ExpenseType::whereKey($this->bulk_select)->toCsv();
+            },'expenseTypes.csv');
+
+           $this->bulk_select = [];
+        }
+    }
+
+
+
     
     public function render()
     {

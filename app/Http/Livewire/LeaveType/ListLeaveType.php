@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Livewire\Branch;
+namespace App\Http\Livewire\LeaveType;
 
-use App\Models\Branch;
 use Livewire\Component;
+use App\Models\LeaveType;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
-class ListBranch extends Component
+class ListLeaveType extends Component
 {
 
     use WithPagination;
-    protected $listeners = ['refreshBranch' => '$refresh'];
+    protected $listeners = ['refreshLeaveType' => '$refresh'];
     protected $paginationTheme = 'bootstrap';
     
     public $search;
@@ -24,14 +24,15 @@ class ListBranch extends Component
     public $delete_id = null;
     public $delete_single_item = true;
 
-    public $edit_branch_id = null;
-    public $edit_branch_name;
-    public $edit_branch_location;
-    public $edit_branch_description;
+    public $edit_leaveType_id = null;
+    public $edit_leaveType_name;
+    public $edit_leaveType_max_leave_count;
+    public $edit_leaveType_leave_count_interval;
+    public $edit_leaveType_description;
 
-    public $edit_branchs = [];
+    public $edit_leaveTypes = [];
 
-    public $edit_branch_multi_name = [];
+    public $edit_leaveType_multi_name;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -40,9 +41,10 @@ class ListBranch extends Component
 
 
     protected $rules = [
-        'edit_branch_name' => 'required|min:2|max:255',
-        'edit_branch_location' => 'nullable|min:2|max:255',
-        'edit_branch_description' => 'nullable|max:255',
+        'edit_leaveType_name' => 'required|min:2|max:255',
+        'edit_leaveType_max_leave_count' => 'required|between:1,10',
+        'edit_leaveType_leave_count_interval' => 'nullable|min:2|max:100',
+        'edit_leaveType_description' => 'nullable|max:255',
     ];
 
 
@@ -54,7 +56,7 @@ class ListBranch extends Component
     public function updatedBulkSelectAll($value)
     {
         if($value){
-            $this->bulk_select = Branch::pluck('id');
+            $this->bulk_select = LeaveType::pluck('id');
         }else{
             $this->bulk_select = [];
         }
@@ -67,9 +69,9 @@ class ListBranch extends Component
                 session()->flash('error','Something went to wrong!!,Please try agian');
 
             }else{
-                Branch::find($this->delete_id)->delete();
-                session()->flash('success','Branch Item has been successfully Deleted!!');
-                $this->emit('refreshBranch');
+                LeaveType::find($this->delete_id)->delete();
+                session()->flash('success','LeaveType Item has been successfully Deleted!!');
+                $this->emit('refreshLeaveType');
                 $this->delete_id = null;
             }
         }else{
@@ -77,9 +79,9 @@ class ListBranch extends Component
                 session()->flash('error','Something went to wrong!!,Please try agian.');
 
             }else{
-                Branch::destroy($this->bulk_select);
-                session()->flash('success','Branch Items has been successfully Deleted!!');
-                $this->emit('refreshBranch');
+                LeaveType::destroy($this->bulk_select);
+                session()->flash('success','LeaveType Items has been successfully Deleted!!');
+                $this->emit('refreshLeaveType');
                 $this->bulk_select = [];
             }
         }    
@@ -92,11 +94,12 @@ class ListBranch extends Component
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
-            $branch = Branch::find($id);
-            $this->edit_branch_id = $branch->id;
-            $this->edit_branch_name = $branch->name;
-            $this->edit_branch_location = $branch->location;
-            $this->edit_branch_description = $branch->description;
+            $leaveType = LeaveType::find($id);
+            $this->edit_leaveType_id = $leaveType->id;
+            $this->edit_leaveType_name = $leaveType->name;
+            $this->edit_leaveType_max_leave_count = $leaveType->max_leave_count;
+            $this->edit_leaveType_leave_count_interval = $leaveType->leave_count_interval;
+            $this->edit_leaveType_description = $leaveType->description;
         }
         
     }
@@ -104,9 +107,9 @@ class ListBranch extends Component
 
     public function editItems()
     {
-        $this->edit_branchs = Branch::whereIn('id',$this->bulk_select)->get();
-        foreach($this->edit_branchs as $branch){
-            $this->edit_branch = $branch;
+        $this->edit_leaveTypes = LeaveType::whereIn('id',$this->bulk_select)->get();
+        foreach($this->edit_leaveTypes as $leaveType){
+            $this->edit_leaveType = $leaveType;
         }
     }
 
@@ -115,17 +118,18 @@ class ListBranch extends Component
     public function updateItem($id)
     {
         $this->validate([
-            "edit_branch_name" => "required|min:2|max:255|unique:branches,name,$id",
+            "edit_leaveType_name" => "required|min:2|max:255|unique:leave_types,name,$id",
         ]);
         
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
-            $branch = Branch::find($id);
-            $branch->name = $this->edit_branch_name;
-            $branch->location = $this->edit_branch_location;
-            $branch->description = $this->edit_branch_description;
-            if($branch->update()){
+            $leaveType = LeaveType::find($id);
+            $leaveType->name = $this->edit_leaveType_name;
+            $leaveType->max_leave_count = $this->edit_leaveType_max_leave_count;
+            $leaveType->leave_count_interval = $this->edit_leaveType_leave_count_interval;
+            $leaveType->description = $this->edit_leaveType_description;
+            if($leaveType->update()){
                 session()->flash('success','Branch Items has been successfully updated!!');
                 $this->emit('refreshBranch');
                 // $this->edit_department_id = null;
@@ -148,17 +152,14 @@ class ListBranch extends Component
 
         }else{
             return response()->streamDownload(function(){
-                echo Branch::whereKey($this->bulk_select)->toCsv();
-            },'branchs.csv');
-
-           $this->bulk_select = [];
+                echo LeaveType::whereKey($this->bulk_select)->toCsv();
+            },'leaveTypes.csv');
         }
     }
 
-
     public function render()
     {
-        $branchs = Branch::latest()->where('name', 'like', '%'.$this->search.'%')->paginate($this->per_page);
-        return view('livewire.branch.list-branch',['branchs' => $branchs]);
+        $leaveTypes = LeaveType::latest()->where('name', 'like', '%'.$this->search.'%')->paginate($this->per_page);
+        return view('livewire.leave-type.list-leave-type',['leaveTypes' => $leaveTypes]);
     }
 }

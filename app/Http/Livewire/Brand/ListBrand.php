@@ -125,6 +125,21 @@ class ListBrand extends Component
     }
 
 
+    public function exportItems()
+    {
+        if($this->bulk_select == [] || $this->bulk_select == '' || $this->bulk_select == null){
+            session()->flash('error','Something went to wrong!!,Please try agian.');
+
+        }else{
+            return response()->streamDownload(function(){
+                echo Brand::whereKey($this->bulk_select)->toCsv();
+            },'brands.csv');
+
+           $this->bulk_select = [];
+        }
+    }
+
+
     public function render()
     {
         $brands = Brand::latest()->where('name', 'like', '%' . $this->search . '%')->paginate($this->per_page);
