@@ -29,7 +29,7 @@ class ListCategory extends Component
 
     public $edit_categories = [];
 
-    public $edit_category_multi_name = [];
+
 
     protected $queryString = [
         'search' => ['except' => ''],

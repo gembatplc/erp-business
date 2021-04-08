@@ -12,6 +12,7 @@ use App\Http\Livewire\LeaveType\LeaveType;
 use App\Http\Livewire\Department\Department;
 use App\Http\Livewire\Designation\Designation;
 use App\Http\Livewire\ExpenseType\ExpenseType;
+use App\Http\Livewire\Shift\Shift;
 use App\Models\LeaveType as ModelsLeaveType;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
@@ -47,3 +48,4 @@ Route::get('/home',
  Route::get('/expense-type',ExpenseType::class)->middleware('auth');
  Route::get('/leave-type',LeaveType::class)->middleware('auth');
  Route::get('/category',Category::class)->middleware('auth');
+ Route::get('/shift',Shift::class)->middleware('auth');
