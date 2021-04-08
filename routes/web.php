@@ -33,7 +33,6 @@ Route::get('/home',
  [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-//  Route::get('/department',Department::class);
  Route::get('/brand',Brand::class);
  Route::get('/department',Department::class)->middleware('auth');
  Route::get('/designation',Designation::class)->middleware('auth');
