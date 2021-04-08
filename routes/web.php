@@ -13,6 +13,9 @@ use App\Http\Livewire\Department\Department;
 use App\Http\Livewire\Designation\Designation;
 use App\Http\Livewire\ExpenseType\ExpenseType;
 use App\Models\LeaveType as ModelsLeaveType;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +54,8 @@ Route::post('testing',function(Request $request){
     $max_counts = $request->input('max_count');
     $leave_intervals = $request->input('leave_interval');
     $descriptions = $request->input('description');
+
+
 
     foreach($names as $name_key => $name){
         $n = ModelsLeaveType::find($name_key);

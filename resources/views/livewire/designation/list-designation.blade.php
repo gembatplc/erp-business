@@ -188,6 +188,7 @@
     </div>
     <div class="modal-footer">
       @if($edit_designation_id != null || $edit_designation_id != 0 || $edit_designation_id != '')
+      <button type="button" wire:click="$set('edit_designation_id',null)" class="btn btn-secondary" data-dismiss="modal">Close</button>
       <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_designation_id }}')">
           <span wire:loading wire:target="updateItem">
               <div class="spinner-border text-danger spinner-border-sm" role="status">
@@ -199,7 +200,6 @@
 
       </button>
       @endif
-      <button type="button" wire:click="$set('edit_designation_id',null)" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
 
   </div>
@@ -215,22 +215,23 @@
 
      <div class="modal-header">
        <h4 class="modal-title" id="myModalLabel">Edit ({{ count($bulk_select) }}) Designations</h4>
-       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+       <button type="button" wire:click="$set('edit_designations',[])" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
        </button>
      </div>
      <div class="modal-body">
        @if($edit_designations != [] || $edit_designations != null)
-       @foreach ($edit_designations as $edit_designation)
+       @foreach ($edit_designations as $index => $edit_designation)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" placeholder="Title" value="{{ $edit_designation->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            <input class="form-control" placeholder="Title" wire:model.lazy="edit_designations.{{$index}}.name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
             @error('name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
+            
         </div>
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_designation->description !!}</textarea>
+            <textarea class="form-control" placeholder="" wire:model.lazy="edit_designations.{{$index}}.description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
             @error('description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
@@ -240,8 +241,16 @@
        @endif
      </div>
      <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-       <button type="button" class="btn btn-primary">Save changes</button>
+       <button type="button" wire:click="$set('edit_designations',[])"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-primary" wire:click="updateItems">
+        <span wire:loading wire:target="updateItems">
+          <div class="spinner-border text-danger spinner-border-sm" role="status">
+              <span class="sr-only">Loading...</span>
+          </div>
+          Loading...
+      </span>
+      <span wire:loading.remove wire:target="updateItems">Save Changes</span>
+        </button>
      </div>
 
    </div>

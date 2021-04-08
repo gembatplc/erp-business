@@ -253,7 +253,7 @@
        @foreach ($edit_leaveTypes as $key => $edit_leaveType)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" value="{{ $edit_leaveType->name }}" name="name[{{ $edit_leaveType->id }}]" placeholder="Title" value="{{ $edit_leaveType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            <input class="form-control" value="{{ $edit_leaveType->name }}" name="name[]" placeholder="Title" value="{{ $edit_leaveType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
             @error('name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
@@ -261,7 +261,7 @@
          {{ $edit_leaveType_multi_name }}
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Maximum Leave Count</label>
-            <input class="form-control"  name="max_count[{{ $edit_leaveType->id }}]" value="{{ $edit_leaveType->max_leave_count }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            <input class="form-control"  name="max_count[]" value="{{ $edit_leaveType->max_leave_count }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
             @error('name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
@@ -270,7 +270,7 @@
 
         <div class="form-group">
             <label class="font-weight-bold">Leave Count Interval</label>
-            <select class="form-control" name="leave_interval[{{ $edit_leaveType->id }}]" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+            <select class="form-control" name="leave_interval[]" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
                 <option value="monthly" @if($edit_leaveType->leave_count_interval == 'monthly') selected @endif>Monthly</option>
                 <option value="weekly"  @if($edit_leaveType->leave_count_interval == 'weekly') selected @endif>Weekly</option>
                 <option value="biweekly"  @if($edit_leaveType->leave_count_interval == 'biweekly') selected @endif>Biweekly</option>
@@ -286,7 +286,7 @@
          @json($edit_leaveType_multi_name)
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" name="description[{{ $edit_leaveType->id }}]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_leaveType->description !!}</textarea>
+            <textarea class="form-control" name="description[]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_leaveType->description !!}</textarea>
             @error('description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
