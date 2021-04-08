@@ -35,13 +35,11 @@ class ListDesignation extends Component
 
 
     protected $rules = [
-        'edit_designation_name' => 'required|min:2|max:255',
-        'edit_designation_description' => 'nullable|max:255',
+        'edit_designations.*.name' => 'required|min:2|max:255',
+        'edit_designations.*.description' => 'nullable|max:255',
     ];
 
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
+    
 
     public function updatedBulkSelectAll($value)
     {
@@ -93,16 +91,14 @@ class ListDesignation extends Component
     }
 
 
-    public function editItems()
-    {
-        $this->edit_designations = Designation::whereIn('id',$this->bulk_select)->get();
-    }
+    
 
 
     public function updateItem($id)
     {
         $this->validate([
             "edit_designation_name" => "required|min:2:max:255|unique:designations,name,$id",
+            "edit_designation_description" => "nullable|max:255"
         ]);
 
         if($id == null || $id == '' || $id <= 0){
@@ -118,6 +114,50 @@ class ListDesignation extends Component
             }else{
                 session()->flash('error','Something went to wrong!!,Please try agian');
             }
+        }
+    }
+
+
+    public function editItems()
+    {
+        $this->edit_designations = Designation::whereIn('id',$this->bulk_select)->get();
+    }
+
+
+
+    public function updateItems()
+    {
+        $this->validate([
+            "edit_designations.*.name" => "required|min:2|max:255",
+            "edit_designations.*.description" => "nullable|max:255",
+        ]);  
+
+        foreach($this->edit_designations as $edit_designation){
+            $designation = Designation::find($edit_designation->id);
+            $designation->name = $edit_designation->name;
+            $designation->description = $edit_designation->description;
+            $designation->update();     
+        }
+
+        session()->flash('success','Designation Items has been successfully updated!!');
+        $this->emit('refreshDesignation');
+        $this->bulk_select = [];
+        $this->edit_designations = [];
+        $this->bulkSelectAll = false;
+    }
+
+
+    public function exportItems()
+    {
+        if($this->bulk_select == [] || $this->bulk_select == '' || $this->bulk_select == null){
+            session()->flash('error','Something went to wrong!!,Please try agian.');
+
+        }else{
+            return response()->streamDownload(function(){
+                echo Designation::whereKey($this->bulk_select)->toCsv();
+            },'designations.csv');
+
+           $this->bulk_select = [];
         }
     }
 

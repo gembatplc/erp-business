@@ -29,7 +29,7 @@ class ListExpenseType extends Component
 
     public $edit_expenseTypes = [];
 
-    public $edit_expenseType_multi_name = [];
+
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -38,16 +38,12 @@ class ListExpenseType extends Component
 
 
     protected $rules = [
-        'edit_expenseType_name' => 'required|min:2|max:255',
-        'edit_expenseType_description' => 'nullable|max:255',
+        'edit_expenseTypes.*.name' => 'required|min:2|max:255',
+        'edit_expenseTypes.*.description' => 'nullable|max:255',
     ];
 
 
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
-
-
+  
     public function updatedBulkSelectAll($value)
     {
         if($value){
@@ -101,21 +97,16 @@ class ListExpenseType extends Component
 
 
     
-    public function editItems()
-    {
-        $this->edit_expenseTypes = ExpenseType::whereIn('id',$this->bulk_select)->get();
-        foreach($this->edit_expenseTypes as $expenseType){
-            $this->edit_expenseType = $expenseType;
-        }
-    }
-
+    
 
 
     public function updateItem($id)
     {
         $this->validate([
-            'edit_expenseType_name' => "required|min:2|max:255|unique:expense_types,name,$id"
+            "edit_expenseType_name" => "required|min:2|max:255|unique:expense_types,name,$id",
+            "edit_expenseType_description" => "nullable|max:255"
         ]);
+        
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
@@ -123,7 +114,7 @@ class ListExpenseType extends Component
             $expenseType->name = $this->edit_expenseType_name;
             $expenseType->description = $this->edit_expenseType_description;
             if($expenseType->update()){
-                session()->flash('success','ExpenseType Items has been successfully updated!!');
+                session()->flash('success','ExpenseType Item has been successfully updated!!');
                 $this->emit('refreshExpenseType');
                 // $this->edit_department_id = null;
             }else{
@@ -133,9 +124,46 @@ class ListExpenseType extends Component
     }
 
 
-    public function multipleItemUpdate(Request $request)
+
+    public function editItems()
     {
-        dd($request->get('name'));
+        $this->edit_expenseTypes = ExpenseType::whereIn('id',$this->bulk_select)->get();
+        
+    }
+
+
+
+    public function updateItems()
+    {
+        $this->validate();
+        foreach ($this->edit_expenseTypes as $edit_expenseType) {
+            $expenseType = ExpenseType::find($edit_expenseType->id);
+            $expenseType->name = $edit_expenseType->name;
+            $expenseType->description = $edit_expenseType->description;
+            $expenseType->update();
+        }
+
+        session()->flash('success','ExpenseType Items has been successfully updated!!');
+        $this->emit('refreshExpenseType');
+        $this->bulk_select = [];
+        $this->edit_expenseTypes = [];
+        $this->bulkSelectAll = false;
+    }
+
+
+
+    public function exportItems()
+    {
+        if($this->bulk_select == [] || $this->bulk_select == '' || $this->bulk_select == null){
+            session()->flash('error','Something went to wrong!!,Please try agian.');
+
+        }else{
+            return response()->streamDownload(function(){
+                echo ExpenseType::whereKey($this->bulk_select)->toCsv();
+            },'expenseTypes.csv');
+
+           $this->bulk_select = [];
+        }
     }
 
 
