@@ -12,7 +12,7 @@ class ListShift extends Component
     use WithPagination;
     protected $listeners = ['refreshShift' => '$refresh'];
     protected $paginationTheme = 'bootstrap';
-    
+
     public $search;
     public $page = 1;
     public $per_page = 10;
@@ -41,15 +41,15 @@ class ListShift extends Component
 
 
     protected $rules = [
-        'edit_shifts.*.branch_id' => 'required|min:2|max:255',
+        'edit_shifts.*.branch_id' => 'required',
         'edit_shifts.*.shift_type' => 'required',
-        'edit_shifts.*.start_time' => 'required|date_format:H:i',
-        'edit_shifts.*.end_time' => 'required|date_format:H:i|after:edit_shifts.*.start_time',
+        'edit_shifts.*.start_time' => 'required',
+        'edit_shifts.*.end_time' => 'required',
         'edit_shifts.*.weekly_holiday' => 'nullable',
     ];
 
 
-   
+
 
     public function updatedBulkSelectAll($value)
     {
@@ -82,8 +82,8 @@ class ListShift extends Component
                 $this->emit('refreshShift');
                 $this->bulk_select = [];
             }
-        }    
-        
+        }
+
     }
 
 
@@ -98,9 +98,9 @@ class ListShift extends Component
             $this->edit_shift_shift_type = $shift->shift_type;
             $this->edit_shift_start_time = $shift->start_time;
             $this->edit_shift_end_time = $shift->end_time;
-            $this->edit_shift_weekly_holiday = $shift->weekly_holiday;
+            $this->edit_shift_weekly_holiday = explode(',',$shift->weekly_holiday);
         }
-        
+
     }
 
 
@@ -115,7 +115,7 @@ class ListShift extends Component
             "edit_shift_weekly_holiday" => "nullable",
 
         ]);
-        
+
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
@@ -147,6 +147,7 @@ class ListShift extends Component
     {
         $this->validate();
 
+
         foreach ($this->edit_shifts as $edit_shift) {
             $shift = Shift::find($edit_shift->id);
             $shift->shift_type = $edit_shift->shift_type;
@@ -154,10 +155,10 @@ class ListShift extends Component
             $shift->start_time = $edit_shift->start_time;
             $shift->end_time = $edit_shift->end_time;
             $shift->weekly_holiday = implode(',',$edit_shift->weekly_holiday);
-            $shift->update();
+
         }
 
-        session()->flash('success','Shift Items has been successfully updated!!');
+        session()->flash('success', 'Shift Items has been successfully updated!!');
         $this->emit('refreshShift');
         $this->bulk_select = [];
         $this->edit_shifts = [];
@@ -180,7 +181,7 @@ class ListShift extends Component
         }
     }
 
-    
+
     public function render()
     {
         $shifts = Shift::latest()->where('shift_type', 'like', '%'.$this->search.'%')->paginate($this->per_page);
