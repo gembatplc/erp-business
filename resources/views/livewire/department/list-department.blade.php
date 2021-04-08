@@ -125,7 +125,7 @@
               <span class="mr-3">Selected Item ({{ count($bulk_select) }})</span>
               <a href="javascript:void(0)" wire:click="editItems" class="mr-3 @if($bulk_select == []) disabled-link @endif" data-toggle="modal" data-target="#multipleEdit"><i class="fa fa-pencil text-info"></i> Edit</a>
               <a href="javascript:void(0)" wire:click="$set('delete_single_item',false)" class="mr-3 @if($bulk_select == []) disabled-link @endif" data-toggle="modal" data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
-              <a href="javascript:void(0)" class="@if($bulk_select == []) disabled-link @endif"><i class="fa fa-file-excel-o text-primary"></i> Export</a>
+              <a href="javascript:void(0)" wire:click="exportItems" class="@if($bulk_select == []) disabled-link @endif"><i class="fa fa-file-excel-o text-primary"></i> Export</a>
             </div>
           </div>
 
@@ -219,25 +219,25 @@
 
            <div class="modal-header">
              <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Departments</h4>
-             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+             <button type="button" class="close" wire:click="$set('edit_departments',[])"  data-dismiss="modal"><span aria-hidden="true">×</span>
              </button>
            </div>
            <div class="modal-body">
              @if($edit_departments != [] || $edit_departments != null)
          
-             @foreach ($edit_departments as $edit_department)
+             @foreach ($edit_departments as $index => $edit_department)
              <div class="form-group animate__fadeInDown">
                   <label class="font-weight-bold">Title</label>
-                  <input class="form-control" wire:model="edit_department_multi_name" placeholder="Title" value="{{ $edit_department->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-                  @error('name')
+                  <input class="form-control" wire:model.lazy="edit_departments.{{$index}}.name" placeholder="Title" value="{{ $edit_department->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+                  @error('edit_departments.{{$index}}.name')
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
               </div>
-               @json($edit_department_multi_name)
+             
               <div class="form-group animate__fadeInDown">
                   <label class="font-weight-bold">Description</label>
-                  <textarea class="form-control" name="description[]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_department->description !!}</textarea>
-                  @error('description')
+                  <textarea class="form-control" wire:model.lazy="edit_departments.{{$index}}.description" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_department->description !!}</textarea>
+                  @error('edit_departments.{{$index}}.description')
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
               </div>
@@ -247,8 +247,16 @@
              @endif
            </div>
            <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             <button type="button" class="btn btn-primary" wire:click="multipleItemUpdate">Save changes</button>
+             <button type="button" class="btn btn-secondary" wire:click="$set('edit_departments',[])" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-primary" wire:click="updateItems">
+              <span wire:loading wire:target="updateItems">
+                <div class="spinner-border text-danger spinner-border-sm" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                Loading...
+            </span>
+            <span wire:loading.remove wire:target="updateItems">Save Changes</span>
+              </button>
            </div>
 
          </div>

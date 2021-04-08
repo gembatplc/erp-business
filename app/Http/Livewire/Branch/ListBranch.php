@@ -31,7 +31,6 @@ class ListBranch extends Component
 
     public $edit_branchs = [];
 
-    public $edit_branch_multi_name = [];
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -40,15 +39,13 @@ class ListBranch extends Component
 
 
     protected $rules = [
-        'edit_branch_name' => 'required|min:2|max:255',
-        'edit_branch_location' => 'nullable|min:2|max:255',
-        'edit_branch_description' => 'nullable|max:255',
+        'edit_branchs.*.name' => 'required|min:2|max:255',
+        'edit_branchs.*.location' => 'nullable|min:2|max:255',
+        'edit_branchs.*.description' => 'nullable|max:255',
     ];
 
 
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
+    
 
 
     public function updatedBulkSelectAll($value)
@@ -102,20 +99,14 @@ class ListBranch extends Component
     }
 
 
-    public function editItems()
-    {
-        $this->edit_branchs = Branch::whereIn('id',$this->bulk_select)->get();
-        foreach($this->edit_branchs as $branch){
-            $this->edit_branch = $branch;
-        }
-    }
-
 
 
     public function updateItem($id)
     {
         $this->validate([
             "edit_branch_name" => "required|min:2|max:255|unique:branches,name,$id",
+            "edit_branch_location" => "required|min:2|max:255",
+            "edit_branch_description" => "nullable|max:255",
         ]);
         
         if($id == null || $id == '' || $id <= 0){
@@ -126,7 +117,7 @@ class ListBranch extends Component
             $branch->location = $this->edit_branch_location;
             $branch->description = $this->edit_branch_description;
             if($branch->update()){
-                session()->flash('success','Branch Items has been successfully updated!!');
+                session()->flash('success','Branch Item has been successfully updated!!');
                 $this->emit('refreshBranch');
                 // $this->edit_department_id = null;
             }else{
@@ -135,9 +126,45 @@ class ListBranch extends Component
         }
     }
 
-    public function multipleItemUpdate(Request $request)
+
+    public function editItems()
     {
-        dd($request->get('name'));
+        $this->edit_branchs = Branch::whereIn('id',$this->bulk_select)->get();
+    }
+
+
+
+    public function updateItems()
+    {
+       $this->validate();
+       foreach($this->edit_branchs as $edit_branch){
+           $branch = Branch::find($edit_branch->id);
+           $branch->name = $edit_branch->name;
+           $branch->location = $edit_branch->location;
+           $branch->description = $edit_branch->description;
+           $branch->update();
+       }
+
+       session()->flash('success','Branch Items has been successfully updated!!');
+       $this->emit('refreshBranch');
+       $this->bulk_select = [];
+       $this->edit_branchs = [];
+       $this->bulkSelectAll = false;
+    }
+
+
+    public function exportItems()
+    {
+        if($this->bulk_select == [] || $this->bulk_select == '' || $this->bulk_select == null){
+            session()->flash('error','Something went to wrong!!,Please try agian.');
+
+        }else{
+            return response()->streamDownload(function(){
+                echo Branch::whereKey($this->bulk_select)->toCsv();
+            },'branchs.csv');
+
+           $this->bulk_select = [];
+        }
     }
 
 

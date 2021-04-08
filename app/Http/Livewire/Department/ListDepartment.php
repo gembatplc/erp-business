@@ -29,7 +29,7 @@ class ListDepartment extends Component
 
     public $edit_departments = [];
 
-    public $edit_department_multi_name = [];
+
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -38,8 +38,8 @@ class ListDepartment extends Component
 
 
     protected $rules = [
-        'edit_department_name' => 'required|min:2|max:255',
-        'edit_department_description' => 'nullable|max:255',
+        'edit_departments.*.name' => 'required|min:2|max:255',
+        'edit_departments.*.description' => 'nullable|max:255',
     ];
 
     // public function arrayPush($id)
@@ -52,9 +52,6 @@ class ListDepartment extends Component
        
     // }
 
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
 
 
     public function updatedBulkSelectAll($value)
@@ -109,20 +106,15 @@ class ListDepartment extends Component
     }
 
 
-    public function editItems()
-    {
-        $this->edit_departments = Department::whereIn('id',$this->bulk_select)->get();
-        foreach($this->edit_departments as $department){
-            $this->edit_department = $department;
-        }
-    }
+    
 
 
 
     public function updateItem($id)
     {
         $this->validate([
-            "edit_department_name" => "required|min:2|max:255|unique:departments,name,$id"
+            "edit_department_name" => "required|min:2|max:255|unique:departments,name,$id",
+            "edit_department_description" => "nullable|max:255"
         ]);
         
         if($id == null || $id == '' || $id <= 0){
@@ -132,9 +124,8 @@ class ListDepartment extends Component
             $department->name = $this->edit_department_name;
             $department->description = $this->edit_department_description;
             if($department->update()){
-                session()->flash('success','Department Items has been successfully updated!!');
+                session()->flash('success','Department Item has been successfully updated!!');
                 $this->emit('refreshDepartment');
-                // $this->edit_department_id = null;
             }else{
                 session()->flash('error','Something went to wrong!!,Please try agian');
             }
@@ -142,12 +133,48 @@ class ListDepartment extends Component
     }
 
 
-    public function multipleItemUpdate(Request $request)
+
+    public function editItems()
     {
-        dd($request->get('name'));
+        $this->edit_departments = Department::whereIn('id',$this->bulk_select)->get();
     }
 
 
+
+
+    public function updateItems()
+    {
+        $this->validate();
+
+        foreach($this->edit_departments as $edit_department){
+            $department = Department::find($edit_department->id);
+            $department->name = $edit_department->name;
+            $department->description = $edit_department->description;
+            $department->update();
+        }
+
+        session()->flash('success','Department Items has been successfully updated!!');
+        $this->emit('refreshDepartment');
+        $this->bulk_select = [];
+        $this->edit_departments = [];
+        $this->bulkSelectAll = false;
+
+    }
+
+
+    public function exportItems()
+    {
+        if($this->bulk_select == [] || $this->bulk_select == '' || $this->bulk_select == null){
+            session()->flash('error','Something went to wrong!!,Please try agian.');
+
+        }else{
+            return response()->streamDownload(function(){
+                echo Department::whereKey($this->bulk_select)->toCsv();
+            },'departments.csv');
+
+           $this->bulk_select = [];
+        }
+    }
     
 
 

@@ -27,55 +27,142 @@
           <ul class="nav side-menu">
             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="index2.html">Dashboard2</a></li>
-                <li><a href="index3.html">Dashboard3</a></li>
+                <li><a href="">Dashboard</a></li>
               </ul>
             </li>
-            <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-balance-scale"></i> Sale <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="#">Sale List</a></li>
+                  <li><a href="#">Add Sale</a></li>
+                </ul>
+              </li>
+
+            <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="#">Customer list</a></li>
+                  <li><a href="#">Customer Group</a></li>
+                  <li><a href="#">Credit Customer</a></li>
+                  <li><a href="#">Paid Customer</a></li>
+                  <li><a href="#">Customer Ledger</a></li>
+                </ul>
+              </li>
+
+              <li><a><i class="fa fa-user"></i> Supplier <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="form.html">Supplier List</a></li>
+                  <li><a href="form_advanced.html">Supplier Groups</a></li>
+                  <li><a href="form_advanced.html">Supplier Ledger</a></li>
+                </ul>
+              </li>
+
+              <li><a><i class="fa fa-cubes"></i> Products <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="#">Products list</a></li>
+                  <li><a href="#">Products Barcode</a></li>
+                  <li><a href="#">Product Quatation</a></li>
+                  <li><a href="#">Product Vairations</a></li>
+                  <li><a href="#">Category Lists</a></li>
+                  <li><a href="#">Add Category</a></li>
+                  <li><a href="#">Add Brands</a></li>
+                  <li><a href="#">Brands Lists</a></li>
+                  <li><a href="#">Product Warrenty</a></li>
+                </ul>
+              </li>
+
+              <li><a><i class="fa fa-shopping-cart"></i> Purcheses <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="#">Purcheses list</a></li>
+                  <li><a href="#">Purcheses Add</a></li>
+                </ul>
+              </li>
+
+
+            <li><a><i class="fa fa-desktop"></i>Account<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="form.html">General Form</a></li>
-                <li><a href="form_advanced.html">Advanced Components</a></li>
-                <li><a href="form_validation.html">Form Validation</a></li>
-                <li><a href="form_wizards.html">Form Wizard</a></li>
-                <li><a href="form_upload.html">Form Upload</a></li>
-                <li><a href="form_buttons.html">Form Buttons</a></li>
+                <li><a href="general_elements.html">Account List</a></li>
+                <li><a href="media_gallery.html">Account Types</a></li>
               </ul>
             </li>
-            <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-users"></i>Human Resource<span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a><i class="fa fa-desktop"></i>HRM<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="general_elements.html">Add Designation</a>
+                        <li><a href="general_elements.html">All Designation</a>
+                        <li><a href="general_elements.html">Add Employee</a>
+                        <li><a href="general_elements.html">All Employee</a>
+                            <li><a href="general_elements.html">All Holyday</a>
+                            <li><a href="general_elements.html">All Leaves</a>
+                                <li><a href="general_elements.html">Leaves Types</a>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-desktop"></i>Department<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="general_elements.html">Add Department</a>
+                        <li><a href="general_elements.html">All Department</a>
+                            <li><a href="general_elements.html">All Divisions</a>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-desktop"></i>Attendence<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="general_elements.html">Add Attendence</a>
+                        <li><a href="general_elements.html">All Attendence</a>
+                        <li><a href="general_elements.html">Attendence Report</a>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-desktop"></i>Payroll<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="general_elements.html">Add Salary</a>
+                        <li><a href="general_elements.html">All Salarty</a>
+                        <li><a href="general_elements.html">Salary Generate</a>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-desktop"></i>Expense<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="general_elements.html">Add Expense</a>
+                        <li><a href="general_elements.html">All Expense</a>
+                            <li><a href="general_elements.html">Expense Types</a>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-desktop"></i>Office Loan<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="general_elements.html">Add Loan</a>
+                        <li><a href="general_elements.html">All Loan</a>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+            <li><a><i class="fa fa-table"></i> Bank <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="general_elements.html">General Elements</a></li>
-                <li><a href="media_gallery.html">Media Gallery</a></li>
-                <li><a href="typography.html">Typography</a></li>
-                <li><a href="icons.html">Icons</a></li>
-                <li><a href="glyphicons.html">Glyphicons</a></li>
-                <li><a href="widgets.html">Widgets</a></li>
-                <li><a href="invoice.html">Invoice</a></li>
-                <li><a href="inbox.html">Inbox</a></li>
-                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="tables.html">Branch List</a></li>
+                <li><a href="tables_dynamic.html">Bank Transection</a></li>
+                <li><a href="tables_dynamic.html">Bank Ledger</a></li>
+                <li><a href="tables_dynamic.html">Add Bank</a></li>
               </ul>
             </li>
-            <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-clone"></i>Quatation <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="tables.html">Tables</a></li>
-                <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                <li><a href="fixed_sidebar.html">Add Quatation</a></li>
+                <li><a href="fixed_footer.html">Quatation Lists</a></li>
               </ul>
             </li>
-            <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="chartjs.html">Chart JS</a></li>
-                <li><a href="chartjs2.html">Chart JS2</a></li>
-                <li><a href="morisjs.html">Moris JS</a></li>
-                <li><a href="echarts.html">ECharts</a></li>
-                <li><a href="other_charts.html">Other Charts</a></li>
-              </ul>
-            </li>
-            <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                <li><a href="fixed_footer.html">Fixed Footer</a></li>
-              </ul>
-            </li>
+
+            <li><a><i class="fa fa-clone"></i>Returns <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="#">Product Sales Return</a></li>
+                  <li><a href="fixed_sidebar.html">Sells Returns</a></li>
+                  <li><a href="fixed_footer.html">Purches Returns</a></li>
+                </ul>
+              </li>
           </ul>
         </div>
         <div class="menu_section">
