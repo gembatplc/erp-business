@@ -192,6 +192,7 @@
     </div>
     <div class="modal-footer">
       @if($edit_expenseType_id != null || $edit_expenseType_id != 0 || $edit_expenseType_id != '')
+      <button type="button" wire:click="$set('edit_expenseType_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
       <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_expenseType_id }}')">
           <span wire:loading wire:target="updateItem">
               <div class="spinner-border text-danger spinner-border-sm" role="status">
@@ -203,7 +204,6 @@
 
       </button>
       @endif
-      <button type="button" wire:click="$set('edit_expenseType_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
 
   </div>
@@ -219,25 +219,25 @@
 
      <div class="modal-header">
        <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Expense Types</h4>
-       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+       <button type="button" wire:click="$set('edit_expenseTypes',[])" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
        </button>
      </div>
      <div class="modal-body">
        @if($edit_expenseTypes != [] || $edit_expenseTypes != null)
    
-       @foreach ($edit_expenseTypes as $edit_expenseType)
+       @foreach ($edit_expenseTypes as $index => $edit_expenseType)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" wire:model="edit_expenseType_multi_name" placeholder="Title" value="{{ $edit_expenseType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('name')
+            <input class="form-control" wire:model.lazy="edit_expenseTypes.{{$index}}.name" placeholder="Title" value="{{ $edit_expenseType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            @error('edit_expenseTypes.{{$index}}.name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
-         @json($edit_expenseType_multi_name)
+      
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" name="description[]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_expenseType->description !!}</textarea>
-            @error('description')
+            <textarea class="form-control" wire:model.lazy="edit_expenseTypes.{{$index}}.description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+            @error('edit_expenseTypes.{{$index}}.description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
@@ -247,8 +247,16 @@
        @endif
      </div>
      <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-       <button type="button" class="btn btn-primary" wire:click="multipleItemUpdate">Save changes</button>
+       <button type="button" wire:click="$set('edit_expenseTypes',[])" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" wire:click="updateItems">
+          <span wire:loading wire:target="updateItems">
+            <div class="spinner-border text-danger spinner-border-sm" role="status">
+                  <span class="sr-only">Loading...</span>
+              </div>
+              Loading...
+          </span>
+          <span wire:loading.remove wire:target="updateItems">Save Changes</span>
+        </button>
      </div>
 
    </div>

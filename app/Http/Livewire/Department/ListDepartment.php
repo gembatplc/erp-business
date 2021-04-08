@@ -29,7 +29,7 @@ class ListDepartment extends Component
 
     public $edit_departments = [];
 
-    public $edit_department_multi_name = [];
+
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -52,9 +52,6 @@ class ListDepartment extends Component
        
     // }
 
-    // public function updated($propertyName){
-    //     $this->validateOnly($propertyName);
-    // }
 
 
     public function updatedBulkSelectAll($value)
@@ -109,13 +106,7 @@ class ListDepartment extends Component
     }
 
 
-    public function editItems()
-    {
-        $this->edit_departments = Department::whereIn('id',$this->bulk_select)->get();
-        foreach($this->edit_departments as $department){
-            $this->edit_department = $department;
-        }
-    }
+    
 
 
 
@@ -142,6 +133,15 @@ class ListDepartment extends Component
     }
 
 
+
+    public function editItems()
+    {
+        $this->edit_departments = Department::whereIn('id',$this->bulk_select)->get();
+    }
+
+
+
+
     public function updateItems()
     {
         $this->validate();
@@ -157,6 +157,7 @@ class ListDepartment extends Component
         $this->emit('refreshDepartment');
         $this->bulk_select = [];
         $this->edit_departments = [];
+        $this->bulkSelectAll = false;
 
     }
 

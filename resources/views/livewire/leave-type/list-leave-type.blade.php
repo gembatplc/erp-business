@@ -215,6 +215,7 @@
     </div>
     <div class="modal-footer">
       @if($edit_leaveType_id != null || $edit_leaveType_id != 0 || $edit_leaveType_id != '')
+      <button type="button" wire:click="$set('edit_leaveType_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
       <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_leaveType_id }}')">
           <span wire:loading wire:target="updateItem">
               <div class="spinner-border text-danger spinner-border-sm" role="status">
@@ -226,7 +227,6 @@
 
       </button>
       @endif
-      <button type="button" wire:click="$set('edit_leaveType_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
 
   </div>
@@ -242,27 +242,27 @@
 
      <div class="modal-header">
        <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Leave Types</h4>
-       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+       <button type="button" wire:click="$set('edit_leaveTypes',[])" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
        </button>
      </div>
      <div class="modal-body">
-         @json($edit_leaveTypes)
+        
        @if($edit_leaveTypes != [] || $edit_leaveTypes != null)
-       <form method="POST" action="{{ route('testing') }}">
-        @csrf
-       @foreach ($edit_leaveTypes as $key => $edit_leaveType)
+      
+      
+       @foreach ($edit_leaveTypes as $index => $edit_leaveType)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" value="{{ $edit_leaveType->name }}" name="name[]" placeholder="Title" value="{{ $edit_leaveType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('name')
+            <input class="form-control" wire:model.lazy="edit_leaveTypes.{{$index}}.name" placeholder="Title" value="{{ $edit_leaveType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            @error('edit_leaveTypes.{{$index}}.name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
-         {{ $edit_leaveType_multi_name }}
+      
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Maximum Leave Count</label>
-            <input class="form-control"  name="max_count[]" value="{{ $edit_leaveType->max_leave_count }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('name')
+            <input class="form-control"  wire:model.lazy="edit_leaveTypes.{{$index}}.max_leave_count" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            @error('edit_leaveTypes.{{$index}}.max_leave_count')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
@@ -270,36 +270,43 @@
 
         <div class="form-group">
             <label class="font-weight-bold">Leave Count Interval</label>
-            <select class="form-control" name="leave_interval[]" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
-                <option value="monthly" @if($edit_leaveType->leave_count_interval == 'monthly') selected @endif>Monthly</option>
-                <option value="weekly"  @if($edit_leaveType->leave_count_interval == 'weekly') selected @endif>Weekly</option>
-                <option value="biweekly"  @if($edit_leaveType->leave_count_interval == 'biweekly') selected @endif>Biweekly</option>
-                <option value="yearly"  @if($edit_leaveType->leave_count_interval == 'yearly') selected @endif>Yearly</option>
+            <select class="form-control" wire:model="edit_leaveTypes.{{$index}}.leave_count_interval" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+                <option value="monthly">Monthly</option>
+                <option value="weekly">Weekly</option>
+                <option value="biweekly">Biweekly</option>
+                <option value="yearly">Yearly</option>
             </select>
         
-            @error('edit_leaveType_leave_count_interval')
+            @error('edit_leaveTypes.{{$index}}.leave_count_interval')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
         
 
-         @json($edit_leaveType_multi_name)
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" name="description[]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_leaveType->description !!}</textarea>
-            @error('description')
+            <textarea class="form-control" wire:model.lazy="edit_leaveTypes.{{$index}}.description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_leaveType->description !!}</textarea>
+            @error('edit_leaveTypes.{{$index}}.description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
         <hr style="height: 4px; background:#b77d7d;">
        @endforeach
-        <button type="submit" class="btn btn-primary">Save</button>
-       </form>
+        
+     
        @endif
      </div>
      <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-       <button type="button" class="btn btn-primary" wire:click="multipleItemUpdate">Save changes</button>
+       <button type="button" wire:click="$set('edit_leaveTypes',[])" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-primary" wire:click="updateItems">
+          <span wire:loading wire:target="updateItems">
+              <div class="spinner-border text-danger spinner-border-sm" role="status">
+                  <span class="sr-only">Loading...</span>
+              </div>
+              Loading...
+          </span>
+          <span wire:loading.remove wire:target="updateItems">Save Changes</span>
+        </button>
      </div>
 
    </div>

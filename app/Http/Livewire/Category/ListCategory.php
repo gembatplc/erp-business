@@ -38,16 +38,13 @@ class ListCategory extends Component
 
 
     protected $rules = [
-        'edit_category_name' => 'required|min:2|max:255',
-        'edit_category_parent_id' => 'nullable',
-        'edit_category_description' => 'nullable|max:255',
+        'edit_categories.*.name' => 'required|min:2|max:255',
+        'edit_categories.*.parent_id' => 'nullable',
+        'edit_categories.*.description' => 'nullable|max:255',
     ];
 
 
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
-
+   
 
     public function updatedBulkSelectAll($value)
     {
@@ -100,15 +97,6 @@ class ListCategory extends Component
     }
 
 
-    public function editItems()
-    {
-        $this->edit_categories = Category::whereIn('id',$this->bulk_select)->get();
-        foreach($this->edit_categories as $category){
-            // $this->edit_category = $category;
-        }
-    }
-
-
 
     public function updateItem($id)
     {
@@ -121,10 +109,10 @@ class ListCategory extends Component
         }else{
             $category = Category::find($id);
             $category->name = $this->edit_category_name;
-            $category->parent_id = $this->edit_category_parent_id;
+            $category->parent_id = $this->edit_category_parent_id == 0 ? null : $this->edit_category_parent_id;
             $category->description = $this->edit_category_description;
             if($category->update()){
-                session()->flash('success','Category Items has been successfully updated!!');
+                session()->flash('success','Category Item has been successfully updated!!');
                 $this->emit('refreshCategory');
                 // $this->edit_department_id = null;
             }else{
@@ -133,9 +121,32 @@ class ListCategory extends Component
         }
     }
 
-    public function multipleItemUpdate(Request $request)
+
+    public function editItems()
     {
-        dd($request->get('name'));
+        $this->edit_categories = Category::whereIn('id',$this->bulk_select)->get();
+    }
+
+
+
+    public function updateItems()
+    {
+        $this->validate();
+
+        foreach ($this->edit_categories as $edit_category) {
+            $category = Category::find($edit_category->id);
+            $category->name = $edit_category->name;
+            $category->parent_id = $edit_category->parent_id == 0 ? null : $edit_category->parent_id;
+            $category->description = $edit_category->description;
+            $category->update();
+        }
+
+        session()->flash('success','Category Items has been successfully updated!!');
+        $this->emit('refreshCategory');
+        $this->bulk_select = [];
+        $this->edit_categories = [];
+        $this->bulkSelectAll = false;
+
     }
 
 

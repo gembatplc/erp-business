@@ -91,10 +91,7 @@ class ListDesignation extends Component
     }
 
 
-    public function editItems()
-    {
-        $this->edit_designations = Designation::whereIn('id',$this->bulk_select)->get();
-    }
+    
 
 
     public function updateItem($id)
@@ -121,6 +118,13 @@ class ListDesignation extends Component
     }
 
 
+    public function editItems()
+    {
+        $this->edit_designations = Designation::whereIn('id',$this->bulk_select)->get();
+    }
+
+
+
     public function updateItems()
     {
         $this->validate([
@@ -139,6 +143,7 @@ class ListDesignation extends Component
         $this->emit('refreshDesignation');
         $this->bulk_select = [];
         $this->edit_designations = [];
+        $this->bulkSelectAll = false;
     }
 
 

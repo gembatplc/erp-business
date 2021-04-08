@@ -184,7 +184,7 @@
         <div class="form-group">
             <label class="font-weight-bold">Parent Category</label>
             <select class="form-control" wire:model="edit_category_parent_id" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
-                <option value="null">----</option>
+                <option value="0">----</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
@@ -206,6 +206,7 @@
     </div>
     <div class="modal-footer">
       @if($edit_category_id != null || $edit_category_id != 0 || $edit_category_id != '')
+      <button type="button" wire:click="$set('edit_category_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
       <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_category_id }}')">
           <span wire:loading wire:target="updateItem">
               <div class="spinner-border text-danger spinner-border-sm" role="status">
@@ -217,7 +218,6 @@
 
       </button>
       @endif
-      <button type="button" wire:click="$set('edit_category_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
 
   </div>
@@ -233,39 +233,38 @@
 
      <div class="modal-header">
        <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Categorys</h4>
-       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+       <button type="button" wire:click="$set('edit_categories',[])" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
        </button>
      </div>
      <div class="modal-body">
        @if($edit_categories != [] || $edit_categories != null)
    
-       @foreach ($edit_categories as $edit_category)
+       @foreach ($edit_categories as $index => $edit_category)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" wire:model="edit_category_multi_name" placeholder="Title" value="{{ $edit_category->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('name')
+            <input class="form-control" wire:model.lazy="edit_categories.{{$index}}.name" placeholder="Title" value="{{ $edit_category->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            @error('edit_categories.{{$index}}.name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
 
         <div class="form-group">
           <label class="font-weight-bold">Parent Category</label>
-          <select class="form-control"  style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
-              <option value="null">----</option>
+          <select class="form-control" wire:model="edit_categories.{{$index}}.parent_id"  style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
+              <option value="0">----</option>
               @foreach ($categories as $category)
-                  <option value="{{ $category->id }}" @if($edit_category->id == $category->id) selected @endif>{{ $category->name }}</option>
+                  <option value="{{ $category->id }}">{{ $category->name }}</option>
               @endforeach
           </select>
-          @error('parent_id')
+          @error('edit_categories.{{$index}}.parent_id')
             <span class="text-danger" role="alert">{{$message}}</span>
           @enderror
       </div>
 
-         @json($edit_category_multi_name)
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" name="description[]" placeholder="" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">{!! $edit_category->description !!}</textarea>
-            @error('description')
+            <textarea class="form-control" wire:model.lazy="edit_categories.{{$index}}.description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+            @error('edit_categories.{{$index}}.description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
@@ -275,8 +274,16 @@
        @endif
      </div>
      <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-       <button type="button" class="btn btn-primary" wire:click="multipleItemUpdate">Save changes</button>
+        <button type="button" wire:click="$set('edit_categories',[])" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" wire:click="updateItems">
+          <span wire:loading wire:target="updateItems">
+              <div class="spinner-border text-danger spinner-border-sm" role="status">
+                  <span class="sr-only">Loading...</span>
+              </div>
+              Loading...
+          </span>
+          <span wire:loading.remove wire:target="updateItems">Save Changes</span>
+        </button>
      </div>
 
    </div>

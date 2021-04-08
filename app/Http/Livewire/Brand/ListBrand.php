@@ -35,16 +35,11 @@ class ListBrand extends Component
 
 
     protected $rules = [
-        'edit_brand_name' => 'required|min:2|max:255',
-        'edit_brand_description' => 'nullable|max:255',
+        'edit_brands.*.name' => 'required|min:2|max:255',
+        'edit_brands.*.description' => 'nullable|max:255',
     ];
 
 
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
 
 
     public function updatedBulkSelectAll($value)
@@ -95,17 +90,13 @@ class ListBrand extends Component
     }
 
 
-    public function editItems()
-    {
-        $this->edit_brands = Brand::whereIn('id', $this->bulk_select)->get();
-    }
-
 
 
     public function updateItem($id)
     {
         $this->validate([
-            "name" => "required|min:2|max:255|unique:brands,name,$id"
+            "edit_brand_name" => "required|min:2|max:255|unique:brands,name,$id",
+            "edit_brand_description" => "nullable|max:255",
         ]);
 
         if ($id == null || $id == '' || $id <= 0) {
@@ -122,6 +113,31 @@ class ListBrand extends Component
                 session()->flash('error', 'Something went to wrong!!,Please try agian');
             }
         }
+    }
+
+
+    public function editItems()
+    {
+        $this->edit_brands = Brand::whereIn('id', $this->bulk_select)->get();
+    }
+
+    
+
+    public function updateItems()
+    {
+        $this->validate();
+        foreach ($this->edit_brands as $edit_brand) {
+            $brand = Brand::find($edit_brand->id);
+            $brand->name = $edit_brand->name;
+            $brand->description = $edit_brand->description;
+            $brand->update();
+        }
+
+        session()->flash('success', 'Brand Items has been successfully updated!!');
+        $this->emit('refreshBrand');
+        $this->bulk_select = [];
+        $this->edit_brands = [];
+        $this->bulkSelectAll = false;
     }
 
 

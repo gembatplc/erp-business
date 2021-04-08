@@ -32,7 +32,7 @@ class ListLeaveType extends Component
 
     public $edit_leaveTypes = [];
 
-    public $edit_leaveType_multi_name;
+
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -41,16 +41,14 @@ class ListLeaveType extends Component
 
 
     protected $rules = [
-        'edit_leaveType_name' => 'required|min:2|max:255',
-        'edit_leaveType_max_leave_count' => 'required|between:1,10',
-        'edit_leaveType_leave_count_interval' => 'nullable|min:2|max:100',
-        'edit_leaveType_description' => 'nullable|max:255',
+        'edit_leaveTypes.*.name' => 'required|min:2|max:255',
+        'edit_leaveTypes.*.max_leave_count' => 'required|between:1,10',
+        'edit_leaveTypes.*.leave_count_interval' => 'nullable|min:2|max:100',
+        'edit_leaveTypes.*.description' => 'nullable|max:255',
     ];
 
 
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
+    
 
 
     public function updatedBulkSelectAll($value)
@@ -105,13 +103,6 @@ class ListLeaveType extends Component
     }
 
 
-    public function editItems()
-    {
-        $this->edit_leaveTypes = LeaveType::whereIn('id',$this->bulk_select)->get();
-        foreach($this->edit_leaveTypes as $leaveType){
-            $this->edit_leaveType = $leaveType;
-        }
-    }
 
 
 
@@ -119,6 +110,9 @@ class ListLeaveType extends Component
     {
         $this->validate([
             "edit_leaveType_name" => "required|min:2|max:255|unique:leave_types,name,$id",
+            "edit_leaveType_max_leave_count" => "required|between:1,10",
+            "edit_leaveType_leave_count_interval" => "nullable|min:2|max:100",
+            "edit_leaveType_description" => "nullable|max:255",
         ]);
         
         if($id == null || $id == '' || $id <= 0){
@@ -130,8 +124,8 @@ class ListLeaveType extends Component
             $leaveType->leave_count_interval = $this->edit_leaveType_leave_count_interval;
             $leaveType->description = $this->edit_leaveType_description;
             if($leaveType->update()){
-                session()->flash('success','Branch Items has been successfully updated!!');
-                $this->emit('refreshBranch');
+                session()->flash('success','Leave Type Items has been successfully updated!!');
+                $this->emit('refreshLeaveType');
                 // $this->edit_department_id = null;
             }else{
                 session()->flash('error','Something went to wrong!!,Please try agian');
@@ -139,9 +133,31 @@ class ListLeaveType extends Component
         }
     }
 
-    public function multipleItemUpdate(Request $request)
+
+    public function editItems()
     {
-        dd($request->get('name'));
+        $this->edit_leaveTypes = LeaveType::whereIn('id',$this->bulk_select)->get();
+    }
+
+
+    public function updateItems()
+    {
+        $this->validate();
+        foreach ($this->edit_leaveTypes as $edit_leaveType) {
+            $leaveType = LeaveType::find($edit_leaveType->id);
+            $leaveType->name = $edit_leaveType->name;
+            $leaveType->max_leave_count = $edit_leaveType->max_leave_count;
+            $leaveType->leave_count_interval = $edit_leaveType->leave_count_interval;
+            $leaveType->description = $edit_leaveType->description;
+            $leaveType->update();
+        }
+
+        session()->flash('success','Leave Type Items has been successfully updated!!');
+        $this->emit('refreshLeaveType');
+        $this->bulk_select = [];
+        $this->edit_leaveTypes = [];
+        $this->bulkSelectAll = false;
+
     }
 
 
