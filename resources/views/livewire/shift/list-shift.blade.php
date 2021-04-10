@@ -181,7 +181,7 @@
             <select class="form-control" wire:model="edit_shift_shift_type" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
                 <option value="0">Fixed</option>
                 <option value="1">Flexiable</option>
-            </select>   
+            </select>
 
             @error('edit_shift_shift_type')
               <span class="text-danger" role="alert">{{$message}}</span>
@@ -196,10 +196,10 @@
                     <option value="{{ $branch->id }}">{{ $branch->name }} -- ({{$branch->location}})</option>
                 @endforeach
             </select>
-        
+
             @error('edit_shift_branch_id')
                 <span class="text-danger" role="alert">{{$message}}</span>
-            @enderror 
+            @enderror
         </div>
 
         <div class="form-group animate__fadeInDown">
@@ -229,7 +229,7 @@
                 <option value="wednesday">Wednesday</option>
                 <option value="thursday">Thursday</option>
             </select>
-        
+
             @error('edit_shift_weekly_holiday')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
@@ -271,14 +271,14 @@
      </div>
      <div class="modal-body">
        @if($edit_shifts != [] || $edit_shifts != null)
-   
+
        @foreach ($edit_shifts as $index => $edit_shift)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Shift Type</label>
             <select class="form-control" wire:model="edit_shifts.{{$index}}.shift_type" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
                 <option value="0">Fixed</option>
                 <option value="1">Flexiable</option>
-            </select>   
+            </select>
 
             @error('edit_shifts.{{$index}}.shift_type')
             <span class="text-danger" role="alert">{{$message}}</span>
@@ -293,10 +293,10 @@
                     <option value="{{ $branch->id }}">{{ $branch->name }} -- ({{$branch->location}})</option>
                 @endforeach
             </select>
-        
+
             @error('edit_shifts.{{$index}}.branch_id')
                 <span class="text-danger" role="alert">{{$message}}</span>
-            @enderror 
+            @enderror
         </div>
 
         <div class="form-group animate__fadeInDown">
@@ -316,10 +316,11 @@
             @enderror
         </div>
 
-
         <div class="form-group">
             <label class="font-weight-bold">Weekly Holiday</label>
             <select class="form-control" multiple wire:model="edit_shifts.{{$index}}.weekly_holiday" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+
+
                 <option value="friday">Friday</option>
                 <option value="saturday">Saturday</option>
                 <option value="sunday">Sunday</option>
@@ -328,14 +329,14 @@
                 <option value="wednesday">Wednesday</option>
                 <option value="thursday">Thursday</option>
             </select>
-        
+
             @error('edit_shifts.{{$index}}.weekly_holiday')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
         <hr style="height: 4px; background:#b77d7d;">
        @endforeach
-      
+
        @endif
      </div>
      <div class="modal-footer">
