@@ -1,7 +1,7 @@
 <div>
     <div class="x_panel">
         <div class="x_title">
-            <h2>Create Shift</h2>
+            <h2>Create Holiday</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -30,6 +30,14 @@
 
             <form  wire:submit.prevent="add">
                 <div class="form-group">
+                    <label class="font-weight-bold">Name</label>
+                    <input type="text" class="form-control" wire:model.lazy="name" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+                    @error('name')
+                      <span class="text-danger" role="alert">{{$message}}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label class="font-weight-bold">Branch</label>
                     <select class="form-control" wire:model="branch_id" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
                         <option disabled selected>Select Branch</option>
@@ -44,49 +52,42 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="font-weight-bold">Shift Type</label>
-                    <select class="form-control" wire:model="shift_type" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
-                        <option value="0">Fixed</option>
-                        <option value="1">Flexiable</option>
+                    <label class="font-weight-bold">Holiday Type</label>
+                    <select class="form-control" wire:model="holiday_type" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+                        <option value="0">Goverment</option>
+                        <option value="1">Official</option>
+                        <option value="2">Other</option>
                     </select>   
 
-                    @error('shift_type')
+                    @error('holiday_type')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <label class="font-weight-bold">Start Time</label>
-                    <input type="time" class="form-control" wire:model.lazy="start_time" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
-                    @error('start_time')
+                    <label class="font-weight-bold">Start date</label>
+                    <input type="date" class="form-control" wire:model.lazy="start_date" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+                    @error('start_date')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
                 </div>
 
 
                 <div class="form-group">
-                    <label class="font-weight-bold">End Time</label>
-                    <input type="time" class="form-control" wire:model.lazy="end_time" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
-                    @error('end_time')
+                    <label class="font-weight-bold">End date</label>
+                    <input type="date" class="form-control" wire:model.lazy="end_date" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+                    @error('end_date')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
                 </div>
 
 
 
-                <div class="form-group" wire:ignore>
-                    <label class="font-weight-bold">Weekly Holiday</label>
-                    <select class="form-control select2" multiple="mulitple"  id="mselect2" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
-                        <option value="friday">Friday</option>
-                        <option value="saturday">Saturday</option>
-                        <option value="sunday">Sunday</option>
-                        <option value="monday">Monday</option>
-                        <option value="tuesday">Tuesday</option>
-                        <option value="wednesday">Wednesday</option>
-                        <option value="thursday">Thursday</option>
-                    </select>
+                <div class="form-group">
+                    <label class="font-weight-bold">Holiday Reason</label>
+                    <textarea wire:model="holiday_reason" class="form-control" rows="3"></textarea>
                 
-                    @error('weekly_holiday')
+                    @error('holiday_reason')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
                 </div>

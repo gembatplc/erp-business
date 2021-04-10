@@ -220,7 +220,7 @@
 
         <div class="form-group">
             <label class="font-weight-bold">Weekly Holiday</label>
-            <select class="form-control" multiple wire:model="edit_shift_weekly_holiday" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+            <select class="form-control select2" id="edit_mselect2" multiple wire:model="edit_shift_weekly_holiday" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
                 <option value="friday">Friday</option>
                 <option value="saturday">Saturday</option>
                 <option value="sunday">Sunday</option>
@@ -355,5 +355,24 @@
    </div>
  </div>
 </div>
+
+@push('script')
+      <script>
+        
+          $(document).ready(function() {
+            let ar = [];
+              $('#edit_mselect2').select2({
+                  tags: true,
+              }).on('change', function(e){
+                ar = $('#edit_mselect2').val();
+                if(!ar.includes(e.target.value)){
+                  ar.push(e.target.value)
+                }
+                @this.set('edit_shift_weekly_holiday',ar)
+              });
+
+          });
+      </script>
+    @endpush
 </div>
 

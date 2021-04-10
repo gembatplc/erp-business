@@ -12,6 +12,7 @@ use App\Http\Livewire\LeaveType\LeaveType;
 use App\Http\Livewire\Department\Department;
 use App\Http\Livewire\Designation\Designation;
 use App\Http\Livewire\ExpenseType\ExpenseType;
+use App\Http\Livewire\Holiday\Holiday;
 use App\Http\Livewire\Shift\Shift;
 use App\Models\LeaveType as ModelsLeaveType;
 use Illuminate\Support\Collection;
@@ -40,11 +41,12 @@ Route::get('/home',
  [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
- Route::get('/brand',Brand::class);
- Route::get('/department',Department::class)->middleware('auth');
- Route::get('/designation',Designation::class)->middleware('auth');
- Route::get('/branch',Branch::class)->middleware('auth');
- Route::get('/expense-type',ExpenseType::class)->middleware('auth');
- Route::get('/leave-type',LeaveType::class)->middleware('auth');
- Route::get('/category',Category::class)->middleware('auth');
- Route::get('/shift',Shift::class)->middleware('auth');
+ Route::get('/brand',Brand::class)->name('brand');
+ Route::get('/department',Department::class)->middleware('auth')->name('department');
+ Route::get('/designation',Designation::class)->middleware('auth')->name('designation');
+ Route::get('/branch',Branch::class)->middleware('auth')->name('branch');
+ Route::get('/expense-type',ExpenseType::class)->middleware('auth')->name('expense_type');
+ Route::get('/leave-type',LeaveType::class)->middleware('auth')->name('leave_type');
+ Route::get('/category',Category::class)->middleware('auth')->name('category');
+ Route::get('/shift',Shift::class)->middleware('auth')->name('shift');
+ Route::get('holiday',Holiday::class)->middleware('auth')->name('holiday');

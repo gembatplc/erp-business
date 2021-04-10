@@ -16,6 +16,8 @@ class CreateShift extends Component
     public $weekly_holiday = ['friday'];
     public $status;
 
+    
+
     protected $rules = [
         'branch_id' => 'required',
         'shift_type' => 'nullable|max:255',
@@ -28,6 +30,8 @@ class CreateShift extends Component
     public function updated($propertyName){
         $this->validateOnly($propertyName);
     }
+
+
 
     public function add(){
         $this->validate();
@@ -45,6 +49,8 @@ class CreateShift extends Component
             session()->flash('error', 'Something went to wrong!! Please Try again.');
         }
     }
+
+
 
 
     public function render()
