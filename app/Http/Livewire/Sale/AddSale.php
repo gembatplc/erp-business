@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Sale;
 
 use Livewire\Component;
 
-class SaleList extends Component
+class AddSale extends Component
 {
     public function render()
     {
-        return view('livewire.sale.sale-list')->extends('layouts.app');
+        return view('livewire.sale.add-sale')->extends('layouts.app');
     }
 }

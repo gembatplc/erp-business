@@ -50,6 +50,7 @@
     <!-- scripts -->
     @include('layouts.scripts')
     <!-- scripts -->
+    @yield('footer.js')
     @livewireScripts
   </body>
 </html>
