@@ -14,6 +14,7 @@ use App\Http\Livewire\Designation\Designation;
 use App\Http\Livewire\ExpenseType\ExpenseType;
 use App\Http\Livewire\Holiday\Holiday;
 use App\Http\Livewire\Shift\Shift;
+use App\Http\Livewire\Sale\SaleList;
 use App\Models\LeaveType as ModelsLeaveType;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
@@ -50,3 +51,4 @@ Route::get('/home',
  Route::get('/category',Category::class)->middleware('auth')->name('category');
  Route::get('/shift',Shift::class)->middleware('auth')->name('shift');
  Route::get('holiday',Holiday::class)->middleware('auth')->name('holiday');
+ Route::get('sale-list',SaleList::class)->middleware('auth')->name('sale.list');

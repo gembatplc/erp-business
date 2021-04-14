@@ -33,7 +33,7 @@
 
             <li><a><i class="fa fa-balance-scale"></i> Sale <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="#">Sale List</a></li>
+                  <li><a href="{{ route('sale.list') }}">Sale List</a></li>
                   <li><a href="#">Add Sale</a></li>
                 </ul>
             </li>
