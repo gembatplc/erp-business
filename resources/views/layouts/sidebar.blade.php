@@ -27,7 +27,7 @@
           <ul class="nav side-menu">
             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="">Dashboard</a></li>
+                <li><a href="{{ route('home') }}">Dashboard</a></li>
               </ul>
             </li>
 
@@ -40,7 +40,7 @@
 
             <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="#">Customer list</a></li>
+                  <li><a href="{{ route('customer.list') }}">Customer list</a></li>
                   <li><a href="#">Customer Group</a></li>
                   <li><a href="#">Credit Customer</a></li>
                   <li><a href="#">Paid Customer</a></li>
