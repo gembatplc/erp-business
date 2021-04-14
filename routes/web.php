@@ -12,6 +12,7 @@ use App\Http\Livewire\Customer\CustomerList;
 use App\Http\Livewire\LeaveType\LeaveType;
 use App\Http\Livewire\Department\Department;
 use App\Http\Livewire\Designation\Designation;
+use App\Http\Livewire\Employeer\EmployeeList;
 use App\Http\Livewire\ExpenseType\ExpenseType;
 use App\Http\Livewire\Holiday\Holiday;
 use App\Http\Livewire\Shift\Shift;
@@ -56,3 +57,4 @@ Route::get('/home',
  Route::get('sale-list',SaleList::class)->middleware('auth')->name('sale.list');
  Route::get('add-sale',AddSale::class)->middleware('auth')->name('add.sale');
  Route::get('customer-list',CustomerList::class)->middleware('auth')->name('customer.list');
+ Route::get('employee-list',EmployeeList::class)->middleware('auth')->name('employee.list');
