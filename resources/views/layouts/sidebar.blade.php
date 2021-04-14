@@ -36,7 +36,7 @@
                   <li><a href="#">Sale List</a></li>
                   <li><a href="#">Add Sale</a></li>
                 </ul>
-              </li>
+            </li>
 
             <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
@@ -62,10 +62,8 @@
                   <li><a href="#">Products Barcode</a></li>
                   <li><a href="#">Product Quatation</a></li>
                   <li><a href="#">Product Vairations</a></li>
-                  <li><a href="#">Category Lists</a></li>
-                  <li><a href="#">Add Category</a></li>
-                  <li><a href="#">Add Brands</a></li>
-                  <li><a href="#">Brands Lists</a></li>
+                  <li class="{{ Request::is('category') ? 'current-page' : '' }}"><a href="{{ route('category') }}">Category</a></li>
+                  <li class="{{ Request::is('brand') ? 'current-page' : '' }}"><a href="{{ route('brand') }}">Brand</a></li>
                   <li><a href="#">Product Warrenty</a></li>
                 </ul>
               </li>
@@ -89,56 +87,50 @@
                 <ul class="nav child_menu">
                   <li><a><i class="fa fa-desktop"></i>HRM<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Designation</a>
-                        <li><a href="general_elements.html">All Designation</a>
-                        <li><a href="general_elements.html">Add Employee</a>
-                        <li><a href="general_elements.html">All Employee</a>
-                            <li><a href="general_elements.html">All Holyday</a>
-                            <li><a href="general_elements.html">All Leaves</a>
-                                <li><a href="general_elements.html">Leaves Types</a>
+                        <li class="{{ Request::is('designation') ? 'current-page' : '' }}"><a href="{{ route('designation') }}">Designation</a></li>
+                        <li><a href="general_elements.html">Add Employee</a></li>
+                        <li><a href="general_elements.html">All Employee</a></li>
+                        <li><a href="{{ route('holiday') }}">Holyday</a></li>
+                        <li><a href="general_elements.html">All Leaves</a></li>
+                        <li class="{{ Request::is('leave-type') ? 'current-page' : '' }}"><a href="{{ route('leave_type') }}">Leaves Types</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-desktop"></i>Department<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Department</a>
-                        <li><a href="general_elements.html">All Department</a>
-                            <li><a href="general_elements.html">All Divisions</a>
-                    </ul>
+                  <li class="{{ Request::is('department') ? 'current-page' : '' }}"><a href="{{ route('department') }}"><i class="fa fa-desktop"></i>Department</a>
                   </li>
 
                   <li><a><i class="fa fa-desktop"></i>Attendence<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Attendence</a>
-                        <li><a href="general_elements.html">All Attendence</a>
-                        <li><a href="general_elements.html">Attendence Report</a>
+                        <li><a href="general_elements.html">Add Attendence</a></li>
+                        <li><a href="general_elements.html">All Attendence</a></li>
+                        <li><a href="general_elements.html">Attendence Report</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-desktop"></i>Payroll<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Salary</a>
-                        <li><a href="general_elements.html">All Salarty</a>
-                        <li><a href="general_elements.html">Salary Generate</a>
+                        <li><a href="general_elements.html">Add Salary</a></li>
+                        <li><a href="general_elements.html">All Salarty</a></li>
+                        <li><a href="general_elements.html">Salary Generate</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-desktop"></i>Expense<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Expense</a>
-                        <li><a href="general_elements.html">All Expense</a>
-                            <li><a href="general_elements.html">Expense Types</a>
+                        <li><a href="general_elements.html">Add Expense</a></li>
+                        <li><a href="general_elements.html">All Expense</a></li>
+                        <li class="{{ Request::is('expense-type') ? 'current-page' : '' }}"><a href="{{ route('expense_type') }}">Expense Types</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-desktop"></i>Office Loan<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Loan</a>
-                        <li><a href="general_elements.html">All Loan</a>
+                        <li><a href="general_elements.html">Add Loan</a></li>
+                        <li><a href="general_elements.html">All Loan</a></li>
                     </ul>
                   </li>
                 </ul>
-              </li>
+            </li>
 
             <li><a><i class="fa fa-table"></i> Bank <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
@@ -170,11 +162,8 @@
           <ul class="nav side-menu">
             <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="e_commerce.html">E-commerce</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="project_detail.html">Project Detail</a></li>
-                <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="profile.html">Profile</a></li>
+                <li class="{{ Request::is('branch') ? 'current-page' : '' }}"><a href="{{ route('branch') }}">Branch</a></li>
+                <li class="{{ Request::is('shift') ? 'current-page' : '' }}"><a href="{{ route('shift') }}">Shift</a></li>
               </ul>
             </li>
             <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>

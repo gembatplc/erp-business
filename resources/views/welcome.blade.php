@@ -48,9 +48,6 @@
               <div>
                 <input type="email" class="form-control" name="email" placeholder="Email" required="" />
               </div>
-<div>
-                <input type="email" class="form-control" name="email" placeholder="Email" required="" />
-              </div>
               <div>
                 <input type="password" class="form-control" name="password" placeholder="Password" required="" />
               </div>

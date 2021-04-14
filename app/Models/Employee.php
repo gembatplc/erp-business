@@ -10,15 +10,15 @@ class Employee extends Model
     use HasFactory;
 
     protected $table = 'employees';
-    protected $fillable = ['division_id','position_id','shift_id','full_name','email','phone','present_address','join_date','duty_type','salary_type','status','employee_unique_id'];
+    protected $fillable = ['division_id','designation_id','shift_id','full_name','email','phone','present_address','join_date','duty_type','salary_type','status','employee_unique_id'];
     /**
      * Get the position that owns the Employee
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function position()
+    public function designation()
     {
-        return $this->belongsTo(Position::class, 'position_id');
+        return $this->belongsTo(Designation::class, 'designation_id');
     }
 
 
