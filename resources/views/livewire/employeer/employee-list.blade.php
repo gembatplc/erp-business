@@ -139,7 +139,7 @@
                     <td class=" ">Web Developer<i class="danger fa fa-long-arrow-up"></i></td>
                     <td class=" ">018**********</td>
                     <td class=" ">admin@gmail.com</td>
-                    <td class="a-right a-right ">photo</td>
+                    <td class="a-right a-right "><img src="" alt="photo"></td>
                     <td class=" last">
                         <a href="#"><i class="fa fa-eye"></i></a>
                         <a href="#"><i class="fa fa-edit"></i></a>
@@ -156,7 +156,7 @@
                     <td class=" ">Web Developer<i class="success fa fa-long-arrow-up"></i></td>
                     <td class=" ">018**********</td>
                     <td class=" ">admin@gmail.com</td>
-                    <td class="a-right a-right ">photo</td>
+                    <td class="a-right a-right "><img src="" alt="photo"></td>
                     <td class=" last">
                         <a href="#"><i class="fa fa-eye"></i></a>
                         <a href="#"><i class="fa fa-edit"></i></a>
@@ -172,7 +172,7 @@
                     <td class=" ">Web Developer<i class="success fa fa-long-arrow-up"></i></td>
                     <td class=" ">018**********</td>
                     <td class=" ">admin@gmail.com</td>
-                    <td class="a-right a-right ">photo</td>
+                    <td class="a-right a-right "><img src="" alt="photo"></td>
                     <td class=" last">
                         <a href="#"><i class="fa fa-eye"></i></a>
                         <a href="#"><i class="fa fa-edit"></i></a>
