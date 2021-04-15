@@ -88,7 +88,7 @@
                   <li><a><i class="fa fa-desktop"></i>HRM<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li class="{{ Request::is('designation') ? 'current-page' : '' }}"><a href="{{ route('designation') }}">Designation</a></li>
-                        <li><a href="{{ route('employee.list') }}">Add Employee</a></li>
+                        <li><a href="{{ route('employee.add') }}">Add Employee</a></li>
                         <li class="{{ Request::is('employee-list') ? 'current-page' : '' }}"><a href="{{ route('employee.list') }}">All Employee</a></li>
                         <li><a href="{{ route('holiday') }}">Holyday</a></li>
                         <li><a href="general_elements.html">All Leaves</a></li>
