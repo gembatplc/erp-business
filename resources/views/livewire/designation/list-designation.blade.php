@@ -100,7 +100,7 @@
         <tfoot>
           <tr class="headings" style="background: rgba(52,73,94,0.94); color:white;">
             <th>
-              {{-- <input type="checkbox" wire:model="bulkSelectAll"> --}}
+              <input type="checkbox" wire:model="bulkSelectAll">
             </th>
             <th class="column-title">Name <i class="fas fa-sort-alpha-up-alt"></i></th>
             <th class="column-title">Description</th>
