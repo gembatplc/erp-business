@@ -147,51 +147,13 @@
                 <td class="a-right a-right ">$7.45</td>
                 <td class="a-right a-right ">$7.45</td>
                 <td class=" last">
-                    <a href="#"><i class="fa fa-eye"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#sale-details"><i class="fa fa-eye"></i></a>
                     <a href="#"><i class="fa fa-edit"></i></a>
                     <a href="#"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
 
-              <tr class="odd pointer">
-                <td class="a-center ">
-                  <input type="checkbox" class="flat" name="table_records">
-                </td>
-                <td class=" ">Al Amin</td>
-                <td class=" ">Monir</td>
-                <td class=" ">121000040</td>
-                <td class=" ">17 apr 2021</td>
-                <td class=" ">Orderd</td>
-                <td class=" ">Paid</td>
-                <td class="a-right a-right ">$7.45</td>
-                <td class="a-right a-right ">$7.45</td>
-                <td class="a-right a-right ">$7.45</td>
-                <td class=" last">
-                    <a href="#"><i class="fa fa-eye"></i></a>
-                    <a href="#"><i class="fa fa-edit"></i></a>
-                    <a href="#"><i class="fa fa-trash"></i></a>
-                </td>
-              </tr>
-
-              <tr class="even pointer">
-                <td class="a-center ">
-                  <input type="checkbox" class="flat" name="table_records">
-                </td>
-                <td class=" ">Al Amin</td>
-                <td class=" ">Monir</td>
-                <td class=" ">121000040</td>
-                <td class=" ">17 apr 2021 </td>
-                <td class=" ">Orderd</td>
-                <td class=" ">Paid</td>
-                <td class="a-right a-right ">$7.45</td>
-                <td class="a-right a-right ">$7.45</td>
-                <td class="a-right a-right ">$7.45</td>
-                <td class=" last">
-                    <a href="#"><i class="fa fa-eye"></i></a>
-                    <a href="#"><i class="fa fa-edit"></i></a>
-                    <a href="#"><i class="fa fa-trash"></i></a>
-                </td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
@@ -266,6 +228,134 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button"  class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- view sale modal --}}
+  <div  class="modal fade" id="sale-details" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalCenterTitle">Sales Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Invoice</a></li>
+                  <li class="breadcrumb-item ">Sales List </li>
+                </ol>
+              </div><!-- /.col -->
+            </div>
+          <div class="card">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <div class="col-sm-8">
+                              <span class="btn btn-success m-r-15 p-10">Billing From</span>
+                              <address class="margin-top10">
+                                <strong class="company_name_p">Bangladesh Automation Technologies</strong><br>
+                                Nikunj-2,Khilkhet,Dhaka-1229<br>
+                                <abbr><b>Mobile:</b></abbr> 234234<br>
+                                <abbr><b>Email:</b></abbr>
+                                example@gmail.com<br>
+                                <abbr><b>Website:</b></abbr>
+                                httpss://www.bdtask.com/<br>
+                                <abbr>VAT Reg No - V4753, IGT Reg No - G3245, </abbr>
+                              </address>
+                          </div>
+                          <div class="col-sm-4 text-left invoice-address">
+                              <h2 class="m-t-0">Sale</h2>
+                              <div>Invoice No: 1001</div>
+                              <div class="m-b-15">Billing Date: 24-Oct-2020</div>
+                              <span class="label label-success-outline m-r-15">Billing To</span>
+                              <address class="customer_name_p">
+                              <strong class="c_name">Walking Customer </strong><br>
+                              <br>
+                              <abbr><b>Mobile:</b></abbr>
+                              </address>
+                          </div>
+                      </div>
+                      <div class="table-responsive">
+                          <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                  <th class="text-center">SL.</th>
+                                  <th class="text-center">Product Name</th>
+                                  <th class="text-center">Unit</th>
+                                  <th class="text-center"></th>
+                                  <th class="text-center"></th>
+                                  <th class="text-right">Qnty</th>
+                                  <th class="text-right"> </th>
+                                  <th class="text-right">Rate</th>
+                                  <th class="text-right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center"><div>Oven - (Sm)</div></td>
+                                <td class="text-center"><div>piece </div></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-right">5.00</td>
+                                <td class="text-right"></td>
+                                <td class="text-right">$ 10000.00</td>
+                                <td class="text-right">$ 50000.00</td>
+                              </tr>
+                              <tr>
+                                <td class="text-left" colspan="5"><b>Grand Total:</b></td>
+                                <td class="text-right"><b>5.00</b></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"><b>$ 50,000.00</b></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                      </div>
+                  </div>
+                      <div class="row">
+                          <div class="col-xs-8">
+                            <p><strong>Thank you for shopping with us</strong></p>
+                          </div>
+                          <div class="col-xs-4">
+                            <table class="table ">
+                              <tbody>
+                                <tr>
+                                  <th class="text-left grand_total">Previous :</th>
+                                  <td class="text-right grand_total">$ 0.00</td>
+                                </tr>
+                                <tr>
+                                  <th class="text-left grand_total">Grand Total :</th>
+                                  <td class="text-right grand_total">$ 50,000.00</td>
+                                </tr>
+                                <tr>
+                                  <th class="text-left grand_total border-bottom-top">Paid Amount : </th>
+                                  <td class="text-right grand_total border-bottom-top">$ 50,000.00</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                      </div>
+                      <div class="row margin-top50">
+                          <div class="col-xs-4">
+                            <div class="text-left">
+                            Received By </div>
+                          </div>
+                          <div class="col-xs-4"></div>
+                          <div class="col-xs-4"> <div class="text-right">
+                          Authorised By </div></div>
+                      </div>
+              {{-- </div> --}}
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-info"><span class="fa fa-print"></span></button>
+            </div>
         </div>
       </div>
     </div>

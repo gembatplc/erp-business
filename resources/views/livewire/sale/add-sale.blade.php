@@ -92,7 +92,7 @@
                                             </td>
                                             <td class="invoice_fields">
                                                 <input class="form-control text-right" type="text" name="total_price[]" id="total_price_1" value="0.00" readonly="readonly">
-                                            </td>
+                                            </td>   
                                             <td>
                                                 <a href="javascript:void(0);" id="remove_button" class="remove_button btn btn-danger"><i class="fa fa-close"></i></a>
                                             </td>
