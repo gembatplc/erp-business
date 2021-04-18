@@ -152,6 +152,44 @@
                     <a href="#"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
+              <tr class="odd pointer">
+                <td class="a-center ">
+                  <input type="checkbox" class="flat" name="table_records">
+                </td>
+                <td class=" ">Al Amin</td>
+                <td class=" ">Monir</td>
+                <td class=" ">121000040</td>
+                <td class=" ">17 apr 2021 </td>
+                <td class=" ">Orderd</td>
+                <td class=" ">Paid</td>
+                <td class="a-right a-right ">$7.45</td>
+                <td class="a-right a-right ">$7.45</td>
+                <td class="a-right a-right ">$7.45</td>
+                <td class=" last">
+                    <a href="#" data-toggle="modal" data-target="#sale-details"><i class="fa fa-eye"></i></a>
+                    <a href="#"><i class="fa fa-edit"></i></a>
+                    <a href="#"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+              <tr class="even pointer">
+                <td class="a-center ">
+                  <input type="checkbox" class="flat" name="table_records">
+                </td>
+                <td class=" ">Al Amin</td>
+                <td class=" ">Monir</td>
+                <td class=" ">121000040</td>
+                <td class=" ">17 apr 2021 </td>
+                <td class=" ">Orderd</td>
+                <td class=" ">Paid</td>
+                <td class="a-right a-right ">$7.45</td>
+                <td class="a-right a-right ">$7.45</td>
+                <td class="a-right a-right ">$7.45</td>
+                <td class=" last">
+                    <a href="#" data-toggle="modal" data-target="#sale-details"><i class="fa fa-eye"></i></a>
+                    <a href="#"><i class="fa fa-edit"></i></a>
+                    <a href="#"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
 
               
             </tbody>
@@ -273,7 +311,7 @@
                               <h2 class="m-t-0">Sale</h2>
                               <div>Invoice No: 1001</div>
                               <div class="m-b-15">Billing Date: 24-Oct-2020</div>
-                              <span class="label label-success-outline m-r-15">Billing To</span>
+                              <span class="btn btn-success m-r-15">Billing To</span>
                               <address class="customer_name_p">
                               <strong class="c_name">Walking Customer </strong><br>
                               <br>
@@ -351,7 +389,6 @@
                           <div class="col-xs-4"> <div class="text-right">
                           Authorised By </div></div>
                       </div>
-              {{-- </div> --}}
             </div>
             <div class="card-footer">
               <button class="btn btn-info"><span class="fa fa-print"></span></button>
