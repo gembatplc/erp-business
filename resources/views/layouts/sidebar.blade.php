@@ -40,6 +40,7 @@
 
             <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
+                  <li><a href="{{ route('add.customer') }}">Add Customer</a></li>
                   <li><a href="{{ route('customer.list') }}">Customer list</a></li>
                   <li><a href="#">Customer Group</a></li>
                   <li><a href="#">Credit Customer</a></li>

@@ -218,7 +218,7 @@
         //Once remove button is clicked
         $(wrapper).on('click', '.remove_button', function(e){
             e.preventDefault();
-            $(this).parent('tr').remove(); //Remove field html
+            $(this).parent('div').remove(); //Remove field html
             x--; //Decrement field counter
         });
     });

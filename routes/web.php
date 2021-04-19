@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Category\Category;
+use App\Http\Livewire\Customer\AddCustomer;
 use App\Http\Livewire\Customer\CustomerList;
 use App\Http\Livewire\LeaveType\LeaveType;
 use App\Http\Livewire\Department\Department;
@@ -58,5 +59,6 @@ Route::get('/home',
  Route::get('sale-list',SaleList::class)->middleware('auth')->name('sale.list');
  Route::get('add-sale',AddSale::class)->middleware('auth')->name('add.sale');
  Route::get('customer-list',CustomerList::class)->middleware('auth')->name('customer.list');
+ Route::get('add-customer',AddCustomer::class)->middleware('auth')->name('add.customer');
  Route::get('employee-list',EmployeeList::class)->middleware('auth')->name('employee.list');
  Route::get('employee-add',AddEmployee::class)->middleware('auth')->name('employee.add');

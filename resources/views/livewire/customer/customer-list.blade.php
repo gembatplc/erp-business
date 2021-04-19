@@ -202,7 +202,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="ModalCenterTitle">Add Sales</h5>
+          <h5 class="modal-title" id="ModalCenterTitle">Add Customer</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -211,10 +211,110 @@
           <div class="card">
               <div class="card-body">
                 <form>
+                  <div class="form-group row">
+                    <label for="customer_name" class="col-sm-2 text-right">Customer Name <i class="text-danger"> * </i>:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input type="text" name="customer_name" class="form-control" id="customer_name" placeholder="Customer Name" value="">
+                      </div>
+                    </div>
+                    <label for="customer_mobile" class="col-sm-2 text-right col-form-label">Mobile No <i class="text-danger"> </i>:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input type="number" name="customer_mobile" class="form-control input-mask-trigger text-left" id="customer_mobile" placeholder="Mobile No" value="" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="customer_email" class="col-sm-2 text-right col-form-label">Email Address1:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input type="text" class="form-control" name="customer_email" id="email"  placeholder="Email" value="">
+                      </div>
+                    </div>
+                    <label for="email_address" class="col-sm-2 text-right col-form-label">Email Address2:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input type="text" class="form-control" name="email_address" id="email_address" placeholder="Email Address" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="phone" class="col-sm-2 text-right col-form-label">Phone:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input class="form-control input-mask-trigger text-left" id="phone" type="number" name="phone" placeholder="Phone" data-inputmask="'alias': 'decimal', 'groupSeparator': '', 'autoGroup': true" im-insert="true" value="">
+                      </div>
+                    </div>
+                    <label for="contact" class="col-sm-2 text-right col-form-label">Contact:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input class="form-control" id="contact" type="text" name="contact" placeholder="Contact" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="address1" class="col-sm-2 text-right col-form-label">Present Address:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <textarea name="customer_address" id="customer_address" class="form-control" placeholder="Address1"></textarea>
+                      </div>
+                    </div>
+                    <label for="address2" class="col-sm-2 text-right col-form-label">Permanent Address:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <textarea name="address2" id="address2" class="form-control" placeholder="Address2"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="company" class="col-sm-2 text-right col-form-label">Company:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input type="text" name="company" class="form-control" id="company" placeholder="company" value="">
+                      </div>
+                    </div>
+                    <label for="city" class="col-sm-2 text-right col-form-label">City:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input type="text" name="city" class="form-control" id="city" placeholder="City" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="state" class="col-sm-2 text-right col-form-label">State:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input type="text" name="state" class="form-control" id="state" placeholder="State" value="">
+                      </div>
+                    </div>
+                    <label for="zip" class="col-sm-2 text-right col-form-label">Zip code:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input name="zip" type="text" class="form-control" id="zip" placeholder="Zip code" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="country" class="col-sm-2 text-right col-form-label">Country:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input name="country" type="text" class="form-control " placeholder="Country" value="" id="country">
+                      </div>
+                    </div>
+                    <label for="previous_balance" class="col-sm-2 text-right col-form-label">Previous Balance:</label>
+                    <div class="col-sm-4">
+                      <div class="">
+                      <input name="previous_balance" type="number" class="form-control text-right" placeholder="Previous Balance">
+                      </div>
+                    </div>
+                  </div>
+                  </form>
+                {{-- <form>
                     <div class="form-row pb-3">
                         <div class="form-group col-md-6">
-                          <label for="fname">First Name<span class="text-danger">*</span></label>
-                          <input type="text" class="form-control" id="fname" placeholder="Enter First Name">
+                          <label for="fname">Customer Name<span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="fname" placeholder="Enter full Name">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="lname">Last Name<span class="text-danger">*</span></label>
@@ -256,14 +356,15 @@
                         <input type="text" class="form-control" id="inputZip">
                       </div>
                     </div>
-                  </form>
+                  </form> --}}
               </div>
           </div>
+          <div class="card-footer text-right">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button"  class="btn btn-primary">Add</button>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button"  class="btn btn-primary">Add</button>
-        </div>
+        
       </div>
     </div>
   </div>
