@@ -226,13 +226,13 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="customer_email" class="col-sm-2 text-right col-form-label">Email Address1:</label>
+                    <label for="customer_group" class="col-sm-2 text-right col-form-label">Customer Group:</label>
                     <div class="col-sm-4">
                       <div class="">
-                      <input type="text" class="form-control" name="customer_email" id="email"  placeholder="Email" value="">
+                      <input type="text" class="form-control" name="customer_group" id="customer_group"  placeholder="Customer Group" value="">
                       </div>
                     </div>
-                    <label for="email_address" class="col-sm-2 text-right col-form-label">Email Address2:</label>
+                    <label for="email_address" class="col-sm-2 text-right col-form-label">Email:</label>
                     <div class="col-sm-4">
                       <div class="">
                       <input type="text" class="form-control" name="email_address" id="email_address" placeholder="Email Address" value="">

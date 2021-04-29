@@ -329,7 +329,7 @@
                                   <th class="text-center"></th>
                                   <th class="text-center"></th>
                                   <th class="text-right">Qnty</th>
-                                  <th class="text-right"> </th>
+                                  <th class="text-right"></th>
                                   <th class="text-right">Rate</th>
                                   <th class="text-right">Amount</th>
                                 </tr>
