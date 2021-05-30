@@ -42,7 +42,7 @@
                 <ul class="nav child_menu">
                   <li><a href="{{ route('add.customer') }}">Add Customer</a></li>
                   <li><a href="{{ route('customer.list') }}">Customer list</a></li>
-                  <li><a href="#">Customer Group</a></li>
+                  <li><a href="{{ route('customer.group') }}">Customer Group</a></li>
                   <li><a href="#">Credit Customer</a></li>
                   <li><a href="#">Paid Customer</a></li>
                   <li><a href="#">Customer Ledger</a></li>
@@ -52,7 +52,7 @@
               <li><a><i class="fa fa-user"></i> Supplier <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="form.html">Supplier List</a></li>
-                  <li><a href="form_advanced.html">Supplier Groups</a></li>
+                  <li><a href="{{ route('supplier.group') }}">Supplier Groups</a></li>
                   <li><a href="form_advanced.html">Supplier Ledger</a></li>
                 </ul>
               </li>

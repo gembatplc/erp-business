@@ -1,29 +1,31 @@
 <?php
 
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Livewire\Brand\Brand;
+use App\Http\Livewire\Shift\Shift;
+use Illuminate\Support\Collection;
+use App\Http\Livewire\Sale\AddSale;
 use App\Http\Livewire\Branch\Branch;
+use App\Http\Livewire\Sale\SaleList;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Holiday\Holiday;
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Category\Category;
+use App\Http\Livewire\LeaveType\LeaveType;
 use App\Http\Livewire\Customer\AddCustomer;
 use App\Http\Livewire\Customer\CustomerList;
-use App\Http\Livewire\LeaveType\LeaveType;
 use App\Http\Livewire\Department\Department;
-use App\Http\Livewire\Designation\Designation;
 use App\Http\Livewire\Employeer\AddEmployee;
-use App\Http\Livewire\Employeer\EmployeeList;
-use App\Http\Livewire\ExpenseType\ExpenseType;
-use App\Http\Livewire\Holiday\Holiday;
-use App\Http\Livewire\Shift\Shift;
-use App\Http\Livewire\Sale\SaleList;
-use App\Http\Livewire\Sale\AddSale;
 use App\Models\LeaveType as ModelsLeaveType;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Str;
+use App\Http\Livewire\Employeer\EmployeeList;
+use App\Http\Livewire\Designation\Designation;
+use App\Http\Livewire\ExpenseType\ExpenseType;
+use App\Http\Livewire\Customer\CustomerGroup\CustomerGroup;
+use App\Http\Livewire\Supplier\SupplierGroup\SupplierGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +60,10 @@ Route::get('/home',
  Route::get('holiday',Holiday::class)->middleware('auth')->name('holiday');
  Route::get('sale-list',SaleList::class)->middleware('auth')->name('sale.list');
  Route::get('add-sale',AddSale::class)->middleware('auth')->name('add.sale');
+ Route::get('customer-group',CustomerGroup::class)->middleware('auth')->name('customer.group');
  Route::get('customer-list',CustomerList::class)->middleware('auth')->name('customer.list');
  Route::get('add-customer',AddCustomer::class)->middleware('auth')->name('add.customer');
  Route::get('employee-list',EmployeeList::class)->middleware('auth')->name('employee.list');
  Route::get('employee-add',AddEmployee::class)->middleware('auth')->name('employee.add');
+
+ Route::get('supplier-group',SupplierGroup::class)->middleware('auth')->name('supplier.group');
