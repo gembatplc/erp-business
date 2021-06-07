@@ -9,11 +9,13 @@ class CreateDepartment extends Component
 {
     public $name;
     public $description;
+    public $parent_id;
     public $status;
 
     protected $rules = [
         'name' => 'required|min:2|max:255|unique:departments,name',
         'description' => 'nullable|max:255',
+        'parent_id' => 'nullable'
     ];
 
     public function updated($propertyName){
@@ -24,6 +26,7 @@ class CreateDepartment extends Component
         $this->validate();
         $department = new Department();
         $department->name = $this->name;
+        $department->parent_id = $this->parent_id ?? null;
         $department->description = $this->description;
         if($department->save()){
             session()->flash('success', 'Department successfully created.');
@@ -37,6 +40,7 @@ class CreateDepartment extends Component
     
     public function render()
     {
-        return view('livewire.department.create-department');
+        $departments = Department::get();
+        return view('livewire.department.create-department',['departments' => $departments]);
     }
 }

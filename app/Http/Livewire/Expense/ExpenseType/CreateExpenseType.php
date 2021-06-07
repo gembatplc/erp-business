@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\ExpenseType;
+namespace App\Http\Livewire\Expense\ExpenseType;
 
-use App\Models\ExpenseType;
 use Livewire\Component;
+use App\Models\ExpenseType;
 
 class CreateExpenseType extends Component
 {
@@ -34,9 +34,8 @@ class CreateExpenseType extends Component
         }
     }
 
-
     public function render()
     {
-        return view('livewire.expense-type.create-expense-type');
+        return view('livewire.expense.expense-type.create-expense-type');
     }
 }

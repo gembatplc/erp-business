@@ -1,15 +1,15 @@
 <div>
     @section('title')
-        Expense Type
+        Account
     @endsection
 
     @section('content')
         <div class="row">
             <div class="col-md-8">
-                @livewire('expense-type.list-expense-type')
+                @livewire('account.list-account')
             </div>
             <div class="col-md-4">
-                @livewire('expense-type.create-expense-type')
+                @livewire('account.create-account')
             </div>
         </div>
     @endsection

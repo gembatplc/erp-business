@@ -79,8 +79,11 @@
 
             <li><a><i class="fa fa-desktop"></i>Account<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="general_elements.html">Account List</a></li>
-                <li><a href="media_gallery.html">Account Types</a></li>
+                <li><a href="{{ route('account') }}">Account List</a></li>
+                <li><a href="{{ route('account_type') }}">Account Types</a></li>
+                <li><a href="{{ route('expense') }}">Expense</a></li>
+                <li><a href="{{ route('expense_type') }}">Expense Type</a></li>
+                <li><a href="{{ route('money_transfer') }}">Money Transfer</a></li>
               </ul>
             </li>
 

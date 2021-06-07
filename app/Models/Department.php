@@ -10,15 +10,27 @@ class Department extends Model
     use HasFactory;
 
     protected $table = 'departments';
-    protected $fillable = ['name','description'];
+    protected $fillable = ['name','parent_id','description'];
+
     /**
-     * Get all of the divisions for the Department
+     * Get the parent that owns the Department
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Department::class, 'parent_id');
+    }
+
+
+    /**
+     * Get all of the childs for the Department
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function divisions()
+    public function childs()
     {
-        return $this->hasMany(Division::class);
+        return $this->hasMany(Department::class);
     }
 
     /**

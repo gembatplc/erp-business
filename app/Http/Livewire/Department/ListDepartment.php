@@ -25,6 +25,7 @@ class ListDepartment extends Component
 
     public $edit_department_id = null;
     public $edit_department_name;
+    public $edit_department_parent_id;
     public $edit_department_description;
 
     public $edit_departments = [];
@@ -39,6 +40,7 @@ class ListDepartment extends Component
 
     protected $rules = [
         'edit_departments.*.name' => 'required|min:2|max:255',
+        'edit_departments.*.parent_id' => 'nullable',
         'edit_departments.*.description' => 'nullable|max:255',
     ];
 
@@ -100,6 +102,7 @@ class ListDepartment extends Component
             $department = Department::find($id);
             $this->edit_department_id = $department->id;
             $this->edit_department_name = $department->name;
+            $this->edit_department_parent_id = $department->parent_id;
             $this->edit_department_description = $department->description;
         }
         
@@ -122,6 +125,7 @@ class ListDepartment extends Component
         }else{
             $department = Department::find($id);
             $department->name = $this->edit_department_name;
+            $department->parent_id = $this->edit_department_parent_id == 0 ? null : $this->edit_department_parent_id;
             $department->description = $this->edit_department_description;
             if($department->update()){
                 session()->flash('success','Department Item has been successfully updated!!');
@@ -149,6 +153,7 @@ class ListDepartment extends Component
         foreach($this->edit_departments as $edit_department){
             $department = Department::find($edit_department->id);
             $department->name = $edit_department->name;
+            $department->parent_id = $edit_department->parent_id == 0 ? null : $edit_department->parent_id;
             $department->description = $edit_department->description;
             $department->update();
         }

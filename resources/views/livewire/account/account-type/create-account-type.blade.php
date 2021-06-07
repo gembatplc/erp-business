@@ -1,7 +1,7 @@
 <div>
     <div class="x_panel">
         <div class="x_title">
-            <h2>Create Department</h2>
+            <h2>Create Account Type</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -31,32 +31,11 @@
             <form  wire:submit.prevent="add">
                 <div class="form-group">
                     <label class="font-weight-bold">Title</label>
-                    <input class="form-control" placeholder="Title" wire:model.lazy="name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+                    <input class="form-control" placeholder="Title" wire:model.lazy="name" type="text" autofocus autocomplete="true" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
                     @error('name')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
                 </div>
-
-                <div class="form-group">
-                  <label class="font-weight-bold">Parent Department</label>
-                  <select class="form-control" wire:model="parent_id" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
-                      <option value="null">----</option>
-                      @foreach ($departments as $department)
-                          <option value="{{ $department->id }}">
-                            @if($department->parent_id > 0)
-                            -- {{ $department->name }}
-                            @else
-                            {{ $department->name }}
-                            @endif
-                            
-                          </option>
-                      @endforeach
-                  </select>
-                  @error('parent_id')
-                    <span class="text-danger" role="alert">{{$message}}</span>
-                  @enderror
-              </div>
-
                 <div class="form-group">
                     <label class="font-weight-bold">Description</label>
                     <textarea class="form-control" placeholder="description" wire:model.lazy="description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
@@ -73,7 +52,7 @@
                             Loading...
                         </span>
                         <span wire:loading.remove wire:target="add">
-                            Add Department
+                            Add Account Type
                         </span>
                     </button>
                 </div>

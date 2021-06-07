@@ -62,6 +62,7 @@
                     <input type="checkbox" wire:model="bulkSelectAll">
                   </th>
                   <th class="column-title">Name <i class="fas fa-sort-alpha-up-alt"></i></th>
+                  <th class="column-title">parent</th>
                   <th class="column-title">Description</th>
                   <th class="column-title">Created Date</th>
                   <th class="column-title no-link last"><span class="nobr">Action</span>
@@ -78,6 +79,7 @@
 
                     </td>
                     <td class=" ">{{ $department->name }}</td>
+                    <td class=" ">{{ $department->parent == null ? '--' : $department->parent->name}}</td>
                     <td class=" ">{{ $department->description == null ? '--' : $department->description}}</td>
                     <td class=" ">{{ $department->created_at->diffForHumans() }}</td>
                     <td class="d-flex">
@@ -104,6 +106,7 @@
                     {{-- <input type="checkbox" wire:model="bulkSelectAll"> --}}
                   </th>
                   <th class="column-title">Name <i class="fas fa-sort-alpha-up-alt"></i></th>
+                  <th class="column-title">Parent</th>
                   <th class="column-title">Description</th>
                   <th class="column-title">Created Date</th>
                   <th class="column-title no-link last"><span class="nobr">Action</span>
@@ -180,6 +183,20 @@
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
               </div>
+
+              <div class="form-group">
+                <label class="font-weight-bold">Parent Department</label>
+                <select class="form-control" wire:model="edit_department_parent_id" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
+                    <option value="0">----</option>
+                    @foreach ($departments as $department)
+                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    @endforeach
+                </select>
+                @error('parent_id')
+                  <span class="text-danger" role="alert">{{$message}}</span>
+                @enderror
+            </div>
+
               <div class="form-group animate__fadeInDown">
                   <label class="font-weight-bold">Description</label>
                   <textarea class="form-control" placeholder="" wire:model.lazy="edit_department_description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
@@ -232,6 +249,19 @@
                   @error('edit_departments.{{$index}}.name')
                     <span class="text-danger" role="alert">{{$message}}</span>
                   @enderror
+              </div>
+
+              <div class="form-group">
+                <label class="font-weight-bold">Parent Department</label>
+                <select class="form-control" wire:model="edit_departments.{{$index}}.parent_id"  style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
+                    <option value="0">----</option>
+                    @foreach ($departments as $department)
+                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    @endforeach
+                </select>
+                @error('edit_departments.{{$index}}.parent_id')
+                  <span class="text-danger" role="alert">{{$message}}</span>
+                @enderror
               </div>
              
               <div class="form-group animate__fadeInDown">

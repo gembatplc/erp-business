@@ -12,6 +12,8 @@ use App\Http\Livewire\Sale\SaleList;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Account\Account;
+use App\Http\Livewire\Expense\Expense;
 use App\Http\Livewire\Holiday\Holiday;
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Category\Category;
@@ -23,7 +25,9 @@ use App\Http\Livewire\Employeer\AddEmployee;
 use App\Models\LeaveType as ModelsLeaveType;
 use App\Http\Livewire\Employeer\EmployeeList;
 use App\Http\Livewire\Designation\Designation;
-use App\Http\Livewire\ExpenseType\ExpenseType;
+use App\Http\Livewire\Account\AccountType\AccountType;
+use App\Http\Livewire\Expense\ExpenseType\ExpenseType;
+use App\Http\Livewire\Account\MoneyTransfer\MoneyTransfer;
 use App\Http\Livewire\Customer\CustomerGroup\CustomerGroup;
 use App\Http\Livewire\Supplier\SupplierGroup\SupplierGroup;
 
@@ -53,7 +57,10 @@ Route::get('/home',
  Route::get('/department',Department::class)->middleware('auth')->name('department');
  Route::get('/designation',Designation::class)->middleware('auth')->name('designation');
  Route::get('/branch',Branch::class)->middleware('auth')->name('branch');
+
  Route::get('/expense-type',ExpenseType::class)->middleware('auth')->name('expense_type');
+ Route::get('/expense',Expense::class)->middleware('auth')->name('expense');
+ 
  Route::get('/leave-type',LeaveType::class)->middleware('auth')->name('leave_type');
  Route::get('/category',Category::class)->middleware('auth')->name('category');
  Route::get('/shift',Shift::class)->middleware('auth')->name('shift');
@@ -63,7 +70,12 @@ Route::get('/home',
  Route::get('customer-group',CustomerGroup::class)->middleware('auth')->name('customer.group');
  Route::get('customer-list',CustomerList::class)->middleware('auth')->name('customer.list');
  Route::get('add-customer',AddCustomer::class)->middleware('auth')->name('add.customer');
+ 
  Route::get('employee-list',EmployeeList::class)->middleware('auth')->name('employee.list');
  Route::get('employee-add',AddEmployee::class)->middleware('auth')->name('employee.add');
 
  Route::get('supplier-group',SupplierGroup::class)->middleware('auth')->name('supplier.group');
+
+ Route::get('account-type',AccountType::class)->middleware('auth')->name('account_type');
+ Route::get('account',Account::class)->middleware('auth')->name('account');
+ Route::get('money-transfer',MoneyTransfer::class)->middleware('auth')->name('money_transfer');

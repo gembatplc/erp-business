@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\ExpenseType;
+namespace App\Http\Livewire\Account\AccountType;
 
-use App\Models\ExpenseType;
 use Livewire\Component;
+use App\Models\AccountType;
 use Livewire\WithPagination;
 
-class ListExpenseType extends Component
+class ListAccountType extends Component
 {
-
     use WithPagination;
-    protected $listeners = ['refreshExpenseType' => '$refresh'];
+    protected $listeners = ['refreshAccountType' => '$refresh'];
     protected $paginationTheme = 'bootstrap';
     
     public $search;
@@ -23,11 +22,11 @@ class ListExpenseType extends Component
     public $delete_id = null;
     public $delete_single_item = true;
 
-    public $edit_expenseType_id = null;
-    public $edit_expenseType_name;
-    public $edit_expenseType_description;
+    public $edit_accountType_id = null;
+    public $edit_accountType_name;
+    public $edit_accountType_description;
 
-    public $edit_expenseTypes = [];
+    public $edit_accountTypes = [];
 
 
 
@@ -38,8 +37,8 @@ class ListExpenseType extends Component
 
 
     protected $rules = [
-        'edit_expenseTypes.*.name' => 'required|min:2|max:255',
-        'edit_expenseTypes.*.description' => 'nullable|max:255',
+        'edit_accountTypes.*.name' => 'required|min:2|max:255',
+        'edit_accountTypes.*.description' => 'nullable|max:255',
     ];
 
 
@@ -60,9 +59,9 @@ class ListExpenseType extends Component
                 session()->flash('error','Something went to wrong!!,Please try agian');
 
             }else{
-                ExpenseType::find($this->delete_id)->delete();
-                session()->flash('success','ExpenseType Item has been successfully Deleted!!');
-                $this->emit('refreshExpenseType');
+                AccountType::find($this->delete_id)->delete();
+                session()->flash('success','Account Type Item has been successfully Deleted!!');
+                $this->emit('refreshAccountType');
                 $this->delete_id = null;
             }
         }else{
@@ -70,9 +69,9 @@ class ListExpenseType extends Component
                 session()->flash('error','Something went to wrong!!,Please try agian.');
 
             }else{
-                ExpenseType::destroy($this->bulk_select);
-                session()->flash('success','ExpenseType Items has been successfully Deleted!!');
-                $this->emit('refreshExpenseType');
+                AccountType::destroy($this->bulk_select);
+                session()->flash('success','Account Type Items has been successfully Deleted!!');
+                $this->emit('refreshAccountType');
                 $this->bulk_select = [];
             }
         }    
@@ -87,10 +86,10 @@ class ListExpenseType extends Component
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
-            $expenseType = ExpenseType::find($id);
-            $this->edit_expenseType_id = $expenseType->id;
-            $this->edit_expenseType_name = $expenseType->name;
-            $this->edit_expenseType_description = $expenseType->description;
+            $accountType = AccountType::find($id);
+            $this->edit_accountType_id = $accountType->id;
+            $this->edit_accountType_name = $accountType->name;
+            $this->edit_accountType_description = $accountType->description;
         }
         
     }
@@ -103,19 +102,19 @@ class ListExpenseType extends Component
     public function updateItem($id)
     {
         $this->validate([
-            "edit_expenseType_name" => "required|min:2|max:255|unique:expense_types,name,$id",
-            "edit_expenseType_description" => "nullable|max:255"
+            "edit_accountType_name" => "required|min:2|max:255|unique:account_types,name,$id",
+            "edit_accountType_description" => "nullable|max:255"
         ]);
         
         if($id == null || $id == '' || $id <= 0){
             session()->flash('error','Something went to wrong!!,Please try agian');
         }else{
-            $expenseType = ExpenseType::find($id);
-            $expenseType->name = $this->edit_expenseType_name;
-            $expenseType->description = $this->edit_expenseType_description;
-            if($expenseType->update()){
-                session()->flash('success','ExpenseType Item has been successfully updated!!');
-                $this->emit('refreshExpenseType');
+            $accountType = AccountType::find($id);
+            $accountType->name = $this->edit_accountType_name;
+            $accountType->description = $this->edit_accountType_description;
+            if($accountType->update()){
+                session()->flash('success','Account Type Item has been successfully updated!!');
+                $this->emit('refreshAccountType');
                 // $this->edit_department_id = null;
             }else{
                 session()->flash('error','Something went to wrong!!,Please try agian');
@@ -127,7 +126,7 @@ class ListExpenseType extends Component
 
     public function editItems()
     {
-        $this->edit_expenseTypes = ExpenseType::whereIn('id',$this->bulk_select)->get();
+        $this->edit_accountTypes = AccountType::whereIn('id',$this->bulk_select)->get();
         
     }
 
@@ -136,17 +135,17 @@ class ListExpenseType extends Component
     public function updateItems()
     {
         $this->validate();
-        foreach ($this->edit_expenseTypes as $edit_expenseType) {
-            $expenseType = ExpenseType::find($edit_expenseType->id);
-            $expenseType->name = $edit_expenseType->name;
-            $expenseType->description = $edit_expenseType->description;
-            $expenseType->update();
+        foreach ($this->edit_accountTypes as $edit_accountType) {
+            $accountType = AccountType::find($edit_accountType->id);
+            $accountType->name = $edit_accountType->name;
+            $accountType->description = $edit_accountType->description;
+            $accountType->update();
         }
 
-        session()->flash('success','ExpenseType Items has been successfully updated!!');
-        $this->emit('refreshExpenseType');
+        session()->flash('success','Account Type Items has been successfully updated!!');
+        $this->emit('refreshAccountType');
         $this->bulk_select = [];
-        $this->edit_expenseTypes = [];
+        $this->edit_accountTypes = [];
         $this->bulkSelectAll = false;
     }
 
@@ -159,8 +158,8 @@ class ListExpenseType extends Component
 
         }else{
             return response()->streamDownload(function(){
-                echo ExpenseType::whereKey($this->bulk_select)->toCsv();
-            },'expenseTypes.csv');
+                echo AccountType::whereKey($this->bulk_select)->toCsv();
+            },'accountTypes.csv');
 
            $this->bulk_select = [];
         }
@@ -168,10 +167,9 @@ class ListExpenseType extends Component
 
 
 
-    
     public function render()
     {
-        $expenseTypes = ExpenseType::latest()->where('name', 'like', '%'.$this->search.'%')->paginate($this->per_page);
-        return view('livewire.expense-type.list-expense-type',['expenseTypes' => $expenseTypes]);
+        $accountTypes = AccountType::latest()->where('name', 'like', '%'.$this->search.'%')->paginate($this->per_page);
+        return view('livewire.account.account-type.list-account-type',['accountTypes' => $accountTypes]);
     }
 }

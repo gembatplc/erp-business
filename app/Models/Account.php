@@ -21,4 +21,25 @@ class Account extends Model
     {
         return $this->belongsTo(AccountType::class,'account_type_id');
     }
+
+
+    /**
+     * Get all of the fromMoneyTransfers for the Account
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function fromMoneyTransfers()
+    {
+        return $this->hasMany(MoneyTransfer::class);
+    }
+
+    /**
+     * Get all of the fromMoneyTransfers for the Account
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function toMoneyTransfers()
+    {
+        return $this->hasMany(MoneyTransfer::class);
+    }
 }

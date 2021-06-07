@@ -17,7 +17,7 @@
 
         @endif
   <div class="x_title">
-    <h2>Category List</h2>
+    <h2>Account Type List</h2>
     <ul class="nav navbar-right panel_toolbox">
       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
       </li>
@@ -62,7 +62,7 @@
               <input type="checkbox" wire:model="bulkSelectAll">
             </th>
             <th class="column-title">Name <i class="fas fa-sort-alpha-up-alt"></i></th>
-            <th class="column-title">parent</th>
+            <th class="column-title">Description</th>
             <th class="column-title">Created Date</th>
             <th class="column-title no-link last"><span class="nobr">Action</span>
             </th>
@@ -71,23 +71,23 @@
         </thead>
 
         <tbody>
-            @forelse ($categories as $category)
-              <tr class="even pointer @if($bulkSelectAll == 1) selected @elseif(in_array($category->id,$bulk_select)) selected  @endif"  wire:loading.remove wire:target="per_page,search,goto_page,next_page,previous_page,deleteItem">
+            @forelse ($accountTypes as $accountType)
+              <tr class="even pointer @if($bulkSelectAll == 1) selected @elseif(in_array($accountType->id,$bulk_select)) selected  @endif"  wire:loading.remove wire:target="per_page,search,goto_page,next_page,previous_page,deleteItem">
               <td class="a-center">
-                  <input type="checkbox" id="check_item{{ $category->id }}" @if($bulkSelectAll == 1) checked @endif  wire:model="bulk_select" value="{{ $category->id }}">
+                  <input type="checkbox" id="check_item{{ $accountType->id }}" @if($bulkSelectAll == 1) checked @endif  wire:model="bulk_select" value="{{ $accountType->id }}">
 
               </td>
-              <td class=" ">{{ $category->name }}</td>
-              <td class=" ">{{ $category->parent == null ? '--' : $category->parent->name}}</td>
-              <td class=" ">{{ $category->created_at->diffForHumans() }}</td>
+              <td class=" ">{{ $accountType->name }}</td>
+              <td class=" ">{{ $accountType->description == null ? '--' : $accountType->description}}</td>
+              <td class=" ">{{ $accountType->created_at->diffForHumans() }}</td>
               <td class="d-flex">
-                  <a href="javascript:void(0)" wire:click="editItem('{{ $category->id }}')" class="mr-2" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil text-info"></i> Edit</a>
-                  <a href="javascript:void(0)" wire:click="$set('delete_id',{{ $category->id }})" data-toggle="modal" data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
+                  <a href="javascript:void(0)" wire:click="editItem('{{ $accountType->id }}')" class="mr-2" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil text-info"></i> Edit</a>
+                  <a href="javascript:void(0)" wire:click="$set('delete_id',{{ $accountType->id }})" data-toggle="modal" data-target="#delete-confirmation"><i class="fa fa-minus-circle text-danger"></i> Delete</a>
               </td>
               </tr>
               @empty
               <tr wire:loading.remove wire:target="per_page,search">
-                  <td colspan="5" style="text-align: center;color:#ca4444;">Category has Empty</td>
+                  <td colspan="5" style="text-align: center;color:#ca4444;">Account Type has Empty</td>
               </tr>
             @endforelse
               <tr wire:loading wire:target="per_page,search,goto_page,previous_page,next_page,deleteItem">
@@ -104,7 +104,7 @@
               {{-- <input type="checkbox" wire:model="bulkSelectAll"> --}}
             </th>
             <th class="column-title">Name <i class="fas fa-sort-alpha-up-alt"></i></th>
-            <th class="column-title">Parent</th>
+            <th class="column-title">Description</th>
             <th class="column-title">Created Date</th>
             <th class="column-title no-link last"><span class="nobr">Action</span>
             </th>
@@ -114,10 +114,10 @@
       </table>
       <div class="clearfix">
           <div class="float-left">
-              Showing {{ $categories->firstItem() }} to {{ $categories->lastItem() }} of {{ $categories->total() }} categorys
+              Showing {{ $accountTypes->firstItem() }} to {{ $accountTypes->lastItem() }} of {{ $accountTypes->total() }} Account Types
           </div>
           <div class="float-right">
-              {{ $categories->links() }}
+              {{ $accountTypes->links() }}
           </div>
       </div>
       <div class="d-flex mt-2">
@@ -159,45 +159,31 @@
 <!-- /modals for delete confimation -->
 
 
-<!-- category editable item -->
+<!-- accountType editable item -->
 <div class="modal fade" wire:ignore.self id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
 
     <div class="modal-header">
-      <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
-      <button type="button" wire:click="$set('edit_category_id',null)"  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+      <h4 class="modal-title" id="myModalLabel">Edit account Type</h4>
+      <button type="button" wire:click="$set('edit_accountType_id',null)"  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
       </button>
     </div>
     <div class="modal-body">
 
 
-      @if($edit_category_id != null || $edit_category_id != 0 || $edit_category_id != '')
+      @if($edit_accountType_id != null || $edit_accountType_id != 0 || $edit_accountType_id != '')
         <div class="form-group animate__fadeInDown">
-            <label class="font-weight-bold">Title</label>
-            <input class="form-control" placeholder="Title" wire:model.lazy="edit_category_name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('edit_category_name')
+            <label class="font-weight-bold">Name</label>
+            <input class="form-control" placeholder="Name" wire:model.lazy="edit_accountType_name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            @error('edit_accountType_name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
-
-        <div class="form-group">
-            <label class="font-weight-bold">Parent Category</label>
-            <select class="form-control" wire:model="edit_category_parent_id" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
-                <option value="0">----</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-            @error('parent_id')
-              <span class="text-danger" role="alert">{{$message}}</span>
-            @enderror
-        </div>
-
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" placeholder="" wire:model.lazy="edit_category_description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
-            @error('edit_category_description')
+            <textarea class="form-control" placeholder="" wire:model.lazy="edit_accountType_description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+            @error('edit_accountType_description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
@@ -205,9 +191,9 @@
 
     </div>
     <div class="modal-footer">
-      @if($edit_category_id != null || $edit_category_id != 0 || $edit_category_id != '')
-      <button type="button" wire:click="$set('edit_category_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_category_id }}')">
+      @if($edit_accountType_id != null || $edit_accountType_id != 0 || $edit_accountType_id != '')
+      <button type="button" wire:click="$set('edit_accountType_id',null)"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" wire:click="updateItem('{{ $edit_accountType_id }}')">
           <span wire:loading wire:target="updateItem">
               <div class="spinner-border text-danger spinner-border-sm" role="status">
                   <span class="sr-only">Loading...</span>
@@ -223,7 +209,7 @@
   </div>
 </div>
 </div>
-<!-- /category editable item -->
+<!-- /accountType editable item -->
 
 <!-- Large modal -->
 
@@ -232,39 +218,26 @@
    <div class="modal-content">
 
      <div class="modal-header">
-       <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Categorys</h4>
-       <button type="button" wire:click="$set('edit_categories',[])" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+       <h4 class="modal-title" id="myModalLabel">Edit {{ count($bulk_select) }} Account Types</h4>
+       <button type="button" wire:click="$set('edit_accountTypes',[])" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
        </button>
      </div>
      <div class="modal-body">
-       @if($edit_categories != [] || $edit_categories != null)
+       @if($edit_accountTypes != [] || $edit_accountTypes != null)
    
-       @foreach ($edit_categories as $index => $edit_category)
+       @foreach ($edit_accountTypes as $index => $edit_accountType)
        <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Title</label>
-            <input class="form-control" wire:model.lazy="edit_categories.{{$index}}.name" placeholder="Title" value="{{ $edit_category->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
-            @error('edit_categories.{{$index}}.name')
+            <input class="form-control" wire:model.lazy="edit_accountTypes.{{$index}}.name" placeholder="Title" value="{{ $edit_accountType->name }}" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+            @error('edit_accountTypes.{{$index}}.name')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
-
-        <div class="form-group">
-          <label class="font-weight-bold">Parent Category</label>
-          <select class="form-control" wire:model="edit_categories.{{$index}}.parent_id"  style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
-              <option value="0">----</option>
-              @foreach ($categories as $category)
-                  <option value="{{ $category->id }}">{{ $category->name }}</option>
-              @endforeach
-          </select>
-          @error('edit_categories.{{$index}}.parent_id')
-            <span class="text-danger" role="alert">{{$message}}</span>
-          @enderror
-        </div>
-
+      
         <div class="form-group animate__fadeInDown">
             <label class="font-weight-bold">Description</label>
-            <textarea class="form-control" wire:model.lazy="edit_categories.{{$index}}.description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
-            @error('edit_categories.{{$index}}.description')
+            <textarea class="form-control" wire:model.lazy="edit_accountTypes.{{$index}}.description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+            @error('edit_accountTypes.{{$index}}.description')
               <span class="text-danger" role="alert">{{$message}}</span>
             @enderror
         </div>
@@ -274,10 +247,10 @@
        @endif
      </div>
      <div class="modal-footer">
-        <button type="button" wire:click="$set('edit_categories',[])" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <button type="button" wire:click="$set('edit_accountTypes',[])" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" wire:click="updateItems">
           <span wire:loading wire:target="updateItems">
-              <div class="spinner-border text-danger spinner-border-sm" role="status">
+            <div class="spinner-border text-danger spinner-border-sm" role="status">
                   <span class="sr-only">Loading...</span>
               </div>
               Loading...
@@ -290,4 +263,3 @@
  </div>
 </div>
 </div>
-

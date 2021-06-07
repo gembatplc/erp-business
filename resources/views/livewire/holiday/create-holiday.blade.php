@@ -51,6 +51,20 @@
                     @enderror                   
                 </div>
 
+                <div class="form-group" wire:ignore>
+                  <label class="font-weight-bold">Department</label>
+                  <select class="form-control select2" id="mselect2" multiple  style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+                      <option disabled selected>Select Department</option>
+                      @foreach ($departments as $department)
+                       <option value="{{ $department->id }}">{{ $department->name }}</option>
+                      @endforeach
+                  </select>
+              
+                  @error('department_id')
+                    <span class="text-danger" role="alert">{{$message}}</span>
+                  @enderror                   
+              </div>
+
                 <div class="form-group">
                     <label class="font-weight-bold">Holiday Type</label>
                     <select class="form-control" wire:model="holiday_type" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
@@ -103,7 +117,7 @@
                             Loading...
                         </span>
                         <span wire:loading.remove wire:target="add">
-                            Add Shift
+                            Add Holidays
                         </span>
                     </button>
                 </div>
@@ -123,7 +137,7 @@
                 if(!ar.includes(e.target.value)){
                   ar.push(e.target.value)
                 }
-                @this.set('weekly_holiday',ar)
+                @this.set('department_id',ar)
               });
 
           });

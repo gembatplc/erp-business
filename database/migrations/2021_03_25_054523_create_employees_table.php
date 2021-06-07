@@ -15,7 +15,7 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('division_id')->constrained('divisions')->onDelete('cascade');
+            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->foreignId('designation_id')->constrained('designations')->onDelete('cascade');
             $table->foreignId('shift_id')->constrained('shifts')->onDelete('cascade');
             $table->string('full_name');
@@ -26,6 +26,7 @@ class CreateEmployeesTable extends Migration
             $table->tinyInteger('duty_type')->default(1)->comment('1 = full time , 0 = part time , 2 = contractual'); # 1 = full time , 0 = part time , 2 = contractual
             $table->tinyInteger('salary_type')->default(2)->comment('1 = hourly, 2 = monthly, 3 = yearly, 0 = base'); # 1 = hourly , 2 = monthly , 0 = base , 3 = yearly
             $table->float('salary')->default(0.00);
+            $table->string('photo')->nullable();
             $table->boolean('status')->default(1)->comment('1 = active, 2 = deactivate'); # 1 = active , 0 = deactivate
             $table->string('employee_unique_id')->unique();
             $table->timestamps();
