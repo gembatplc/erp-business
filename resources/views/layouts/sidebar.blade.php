@@ -40,9 +40,9 @@
 
             <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="{{ route('customer_create') }}">Add Customer</a></li>
-                  <li><a href="{{ route('customer_list') }}">Customer list</a></li>
-                  <li><a href="{{ route('customer.group') }}">Customer Group</a></li>
+                  <li class="{{ Request::is('customer-create') ? 'current-page' : '' }}"><a href="{{ route('customer_create') }}">Add Customer</a></li>
+                  <li class="{{ Request::is('customer-list') ? 'current-page' : '' }}"><a href="{{ route('customer_list') }}">Customer list</a></li>
+                  <li class="{{ Request::is('customer-group') ? 'current-page' : '' }}"><a href="{{ route('customer.group') }}">Customer Group</a></li>
                   <li><a href="#">Credit Customer</a></li>
                   <li><a href="#">Paid Customer</a></li>
                   <li><a href="#">Customer Ledger</a></li>
@@ -51,8 +51,9 @@
 
               <li><a><i class="fa fa-user"></i> Supplier <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="form.html">Supplier List</a></li>
-                  <li><a href="{{ route('supplier.group') }}">Supplier Groups</a></li>
+                  <li class="{{ Request::is('supplier-create') ? 'current-page' : '' }}"><a href="{{ route('supplier_create') }}">Add Supplier</a></li>
+                  <li class="{{ Request::is('supplier-list') ? 'current-page' : '' }}"><a href="{{ route('supplier_list') }}">Supplier List</a></li>
+                  <li class="{{ Request::is('supplier-group') ? 'current-page' : '' }}"><a href="{{ route('supplier.group') }}">Supplier Groups</a></li>
                   <li><a href="form_advanced.html">Supplier Ledger</a></li>
                 </ul>
               </li>
@@ -65,6 +66,7 @@
                   <li><a href="#">Product Vairations</a></li>
                   <li class="{{ Request::is('category') ? 'current-page' : '' }}"><a href="{{ route('category') }}">Category</a></li>
                   <li class="{{ Request::is('brand') ? 'current-page' : '' }}"><a href="{{ route('brand') }}">Brand</a></li>
+                  <li class="{{ Request::is('warehouse') ? 'current-page' : '' }}"><a href="{{ route('warehouse') }}">Warehouse</a></li>
                   <li><a href="#">Product Warrenty</a></li>
                 </ul>
               </li>
@@ -79,11 +81,11 @@
 
             <li><a><i class="fa fa-desktop"></i>Account<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="{{ route('account') }}">Account List</a></li>
-                <li><a href="{{ route('account_type') }}">Account Types</a></li>
-                <li><a href="{{ route('expense') }}">Expense</a></li>
-                <li><a href="{{ route('expense_type') }}">Expense Type</a></li>
-                <li><a href="{{ route('money_transfer') }}">Money Transfer</a></li>
+                <li class="{{ Request::is('account') ? 'current-page' : '' }}"><a href="{{ route('account') }}">Account List</a></li>
+                <li class="{{ Request::is('account-type') ? 'current-page' : '' }}"><a href="{{ route('account_type') }}">Account Types</a></li>
+                <li class="{{ Request::is('expense') ? 'current-page' : '' }}"><a href="{{ route('expense') }}">Expense</a></li>
+                <li class="{{ Request::is('expense-type') ? 'current-page' : '' }}"><a href="{{ route('expense_type') }}">Expense Type</a></li>
+                <li class="{{ Request::is('money-transfer') ? 'current-page' : '' }}"><a href="{{ route('money_transfer') }}">Money Transfer</a></li>
               </ul>
             </li>
 
@@ -91,41 +93,49 @@
                 <ul class="nav child_menu">
                   <li><a><i class="fa fa-desktop"></i>HRM<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                        <li class="{{ Request::is('department') ? 'current-page' : '' }}"><a href="{{ route('department') }}">Department</a></li>
                         <li class="{{ Request::is('designation') ? 'current-page' : '' }}"><a href="{{ route('designation') }}">Designation</a></li>
-                        <li><a href="{{ route('employee.add') }}">Add Employee</a></li>
-                        <li class="{{ Request::is('employee-list') ? 'current-page' : '' }}"><a href="{{ route('employee.list') }}">All Employee</a></li>
-                        <li><a href="{{ route('holiday') }}">Holyday</a></li>
-                        <li><a href="general_elements.html">All Leaves</a></li>
+                        <li class="{{ Request::is('employee-create') ? 'current-page' : '' }}"><a href="{{ route('employee_create') }}">Add Employee</a></li>
+                        <li class="{{ Request::is('employee-list') ? 'current-page' : '' }}"><a href="{{ route('employee_list') }}">All Employee</a></li>
+                        <li class="{{ Request::is('holiday') ? 'current-page' : '' }}"><a href="{{ route('holiday') }}">Holyday</a></li>
+                        <li class="{{ Request::is('leave-create') ? 'current-page' : '' }}"><a href="{{ route('leave_create') }}">Create Leave</a></li>
+                        <li class="{{ Request::is('leave-list') ? 'current-page' : '' }}"><a href="{{ route('leave_list') }}">List Leaves</a></li>
                         <li class="{{ Request::is('leave-type') ? 'current-page' : '' }}"><a href="{{ route('leave_type') }}">Leaves Types</a></li>
                     </ul>
                   </li>
 
-                  <li class="{{ Request::is('department') ? 'current-page' : '' }}"><a href="{{ route('department') }}"><i class="fa fa-desktop"></i>Department</a>
-                  </li>
+                  
 
                   <li><a><i class="fa fa-desktop"></i>Attendence<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Attendence</a></li>
-                        <li><a href="general_elements.html">All Attendence</a></li>
+                        <li class="{{ Request::is('attendance-create') ? 'current-page' : '' }}"><a href="{{ route('attendance_create') }}">Add Attendence</a></li>
+                        <li class="{{ Request::is('attendance-list') ? 'current-page' : '' }}"><a href="{{ route('attendance_list') }}">List Attendence</a></li>
                         <li><a href="general_elements.html">Attendence Report</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-desktop"></i>Payroll<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Salary</a></li>
-                        <li><a href="general_elements.html">All Salarty</a></li>
-                        <li><a href="general_elements.html">Salary Generate</a></li>
+                        <li class="{{ Request::is('payroll-create') ? 'current-page' : '' }}"><a href="{{  route('payroll_create') }}">Add Payroll</a></li>
+                        <li class="{{ Request::is('payroll-list') ? 'current-page' : '' }}"><a href="{{  route('payroll_list') }}">List Payroll</a></li>
+                        <li><a href="{{  route('payroll_create') }}">Payroll Generate</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-desktop"></i>Expense<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-desktop"></i>Allowance<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">Add Expense</a></li>
-                        <li><a href="general_elements.html">All Expense</a></li>
-                        <li class="{{ Request::is('expense-type') ? 'current-page' : '' }}"><a href="{{ route('expense_type') }}">Expense Types</a></li>
+                        <li class="{{ Request::is('allowance-create') ? 'current-page' : '' }}"><a href="{{  route('allowance_create') }}">Add Allowance</a></li>
+                        <li class="{{ Request::is('allowance-list') ? 'current-page' : '' }}"><a href="{{  route('allowance_list') }}">List Allowance</a></li>
                     </ul>
                   </li>
+
+                  <li><a><i class="fa fa-desktop"></i>Deduction<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li class="{{ Request::is('deduction-create') ? 'current-page' : '' }}"><a href="{{  route('deduction_create') }}">Add Deduction</a></li>
+                        <li class="{{ Request::is('deduction-list') ? 'current-page' : '' }}"><a href="{{  route('deduction_list') }}">List Deduction</a></li>
+                    </ul>
+                  </li>
+
 
                   <li><a><i class="fa fa-desktop"></i>Office Loan<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -138,7 +148,6 @@
 
             <li><a><i class="fa fa-table"></i> Bank <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="tables.html">Branch List</a></li>
                 <li><a href="tables_dynamic.html">Bank Transection</a></li>
                 <li><a href="tables_dynamic.html">Bank Ledger</a></li>
                 <li><a href="tables_dynamic.html">Add Bank</a></li>
@@ -164,10 +173,12 @@
         <div class="menu_section">
           <h3>Live On</h3>
           <ul class="nav side-menu">
-            <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-bug"></i> Settings <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li class="{{ Request::is('branch') ? 'current-page' : '' }}"><a href="{{ route('branch') }}">Branch</a></li>
                 <li class="{{ Request::is('shift') ? 'current-page' : '' }}"><a href="{{ route('shift') }}">Shift</a></li>
+                <li class="{{ Request::is('currency') ? 'current-page' : '' }}"><a href="{{ route('currency') }}">Currency</a></li>
+                <li class="{{ Request::is('tax') ? 'current-page' : '' }}"><a href="{{ route('tax') }}">Tax</a></li>
               </ul>
             </li>
             <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>

@@ -32,6 +32,7 @@ use App\Http\Livewire\Expense\ExpenseType\ExpenseType;
 use App\Http\Livewire\Account\MoneyTransfer\MoneyTransfer;
 use App\Http\Livewire\Attendance\CreateAttendance;
 use App\Http\Livewire\Attendance\ListAttendance;
+use App\Http\Livewire\Currency\Currency;
 use App\Http\Livewire\Customer\CreateCustomer;
 use App\Http\Livewire\Customer\CustomerGroup\CustomerGroup;
 use App\Http\Livewire\Customer\ListCustomer;
@@ -44,6 +45,8 @@ use App\Http\Livewire\Payroll\ListPayroll;
 use App\Http\Livewire\Supplier\CreateSupplier;
 use App\Http\Livewire\Supplier\ListSupplier;
 use App\Http\Livewire\Supplier\SupplierGroup\SupplierGroup;
+use App\Http\Livewire\Tax\Tax;
+use App\Http\Livewire\Warehouse\Warehouse;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,17 +70,18 @@ Route::get('/home',
  [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
- Route::get('/brand',Brand::class)->name('brand');
+
  Route::get('/department',Department::class)->middleware('auth')->name('department');
  Route::get('/designation',Designation::class)->middleware('auth')->name('designation');
  Route::get('/branch',Branch::class)->middleware('auth')->name('branch');
-
- Route::get('/expense-type',ExpenseType::class)->middleware('auth')->name('expense_type');
- Route::get('/expense',Expense::class)->middleware('auth')->name('expense');
  
+
  Route::get('/leave-type',LeaveType::class)->middleware('auth')->name('leave_type');
  Route::get('/leave-list',ListLeave::class)->middleware('auth')->name('leave_list');
  Route::get('/leave-create',CreateLeave::class)->middleware('auth')->name('leave_create');
+
+ Route::get('/shift',Shift::class)->middleware('auth')->name('shift');
+ Route::get('holiday',Holiday::class)->middleware('auth')->name('holiday');
 
 
  Route::get('/attendance-create',CreateAttendance::class)->middleware('auth')->name('attendance_create');
@@ -95,10 +99,11 @@ Route::get('/home',
  Route::get('/payroll-create',CreatePayroll::class)->middleware('auth')->name('payroll_create');
  Route::get('/payroll-list',ListPayroll::class)->middleware('auth')->name('payroll_list');
 
- 
+ Route::get('/brand',Brand::class)->name('brand');
  Route::get('/category',Category::class)->middleware('auth')->name('category');
- Route::get('/shift',Shift::class)->middleware('auth')->name('shift');
- Route::get('holiday',Holiday::class)->middleware('auth')->name('holiday');
+ Route::get('/warehouse',Warehouse::class)->name('warehouse');
+ Route::get('/currency',Currency::class)->name('currency');
+ Route::get('/tax',Tax::class)->name('tax');
 
  Route::get('sale-list',SaleList::class)->middleware('auth')->name('sale.list');
  Route::get('add-sale',AddSale::class)->middleware('auth')->name('add.sale');
@@ -108,8 +113,8 @@ Route::get('/home',
  Route::get('customer-list',ListCustomer::class)->middleware('auth')->name('customer_list');
 
  
- Route::get('employee-list',EmployeeList::class)->middleware('auth')->name('employee.list');
- Route::get('employee-add',AddEmployee::class)->middleware('auth')->name('employee.add');
+ Route::get('employee-list',EmployeeList::class)->middleware('auth')->name('employee_list');
+ Route::get('employee-create',AddEmployee::class)->middleware('auth')->name('employee_create');
 
  Route::get('supplier-group',SupplierGroup::class)->middleware('auth')->name('supplier.group');
  Route::get('supplier-create',CreateSupplier::class)->middleware('auth')->name('supplier_create');
@@ -118,3 +123,7 @@ Route::get('/home',
  Route::get('account-type',AccountType::class)->middleware('auth')->name('account_type');
  Route::get('account',Account::class)->middleware('auth')->name('account');
  Route::get('money-transfer',MoneyTransfer::class)->middleware('auth')->name('money_transfer');
+
+
+ Route::get('/expense-type',ExpenseType::class)->middleware('auth')->name('expense_type');
+ Route::get('/expense',Expense::class)->middleware('auth')->name('expense');
