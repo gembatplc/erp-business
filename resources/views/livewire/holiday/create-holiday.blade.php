@@ -1,5 +1,5 @@
 <div>
-    <div class="x_panel">
+    <div class="x_panel shadow-sm border-0">
         <div class="x_title">
             <h2>Create Holiday</h2>
             <ul class="nav navbar-right panel_toolbox">

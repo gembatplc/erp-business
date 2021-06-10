@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\LeaveType;
+namespace App\Http\Livewire\Leave\LeaveType;
 
-use App\Models\LeaveType;
 use Livewire\Component;
+use App\Models\LeaveType;
 
 class CreateLeaveType extends Component
 {
@@ -39,10 +39,9 @@ class CreateLeaveType extends Component
             session()->flash('error', 'Something went to wrong!! Please Try again.');
         }
     }
-
-
+    
     public function render()
     {
-        return view('livewire.leave-type.create-leave-type');
+        return view('livewire.leave.leave-type.create-leave-type');
     }
 }

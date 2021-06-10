@@ -1,5 +1,5 @@
 <div>
-    <div class="x_panel">
+    <div class="x_panel shadow-sm border-0">
         <div class="x_title">
             <h2>Create Category</h2>
             <ul class="nav navbar-right panel_toolbox">
@@ -31,7 +31,7 @@
             <form  wire:submit.prevent="add">
                 <div class="form-group">
                     <label class="font-weight-bold">Title</label>
-                    <input class="form-control" placeholder="Title" wire:model.lazy="name" type="text" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset"/>
+                    <input class="form-control" placeholder="Title" wire:model.lazy="name" type="text" />
                     @error('name')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold">Parent Category</label>
-                    <select class="form-control" wire:model="parent_id" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;">
+                    <select class="form-control" wire:model="parent_id" >
                         <option value="null">----</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">
@@ -60,13 +60,13 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold">Description</label>
-                    <textarea class="form-control" placeholder="description" wire:model.lazy="description" rows="3" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+                    <textarea class="form-control" placeholder="description" wire:model.lazy="description" rows="3" ></textarea>
                     @error('description')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-sm">
+                    <button type="submit" class="btn btn-outline-success btn-sm">
                         <span wire:loading wire:target="add">
                             <div class="spinner-border text-danger spinner-border-sm" role="status">
                                 <span class="sr-only">Loading...</span>

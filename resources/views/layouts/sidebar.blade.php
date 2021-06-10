@@ -1,4 +1,4 @@
-<div class="col-md-3 left_col menu_fixed" style="background: #2A3F54;">
+<div class="col-md-3 left_col menu_fixed shadow-sm" style="background: #2A3F54;">
     <div class="left_col scroll-view">
       <div class="navbar nav_title" style="border: 0; background: #172d44;">
         <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>{{ config('app.name') }}</span></a>
@@ -40,8 +40,8 @@
 
             <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="{{ route('add.customer') }}">Add Customer</a></li>
-                  <li><a href="{{ route('customer.list') }}">Customer list</a></li>
+                  <li><a href="{{ route('customer_create') }}">Add Customer</a></li>
+                  <li><a href="{{ route('customer_list') }}">Customer list</a></li>
                   <li><a href="{{ route('customer.group') }}">Customer Group</a></li>
                   <li><a href="#">Credit Customer</a></li>
                   <li><a href="#">Paid Customer</a></li>

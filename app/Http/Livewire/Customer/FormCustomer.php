@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Customer;
 
 use Livewire\Component;
 
-class CustomerList extends Component
+class FormCustomer extends Component
 {
     public function render()
     {
-        return view('livewire.customer.customer-list');
+        return view('livewire.customer.form-customer');
     }
 }

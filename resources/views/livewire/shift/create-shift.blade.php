@@ -1,5 +1,5 @@
 <div>
-    <div class="x_panel">
+    <div class="x_panel shadow-sm border-0">
         <div class="x_title">
             <h2>Create Shift</h2>
             <ul class="nav navbar-right panel_toolbox">
@@ -31,7 +31,7 @@
             <form  wire:submit.prevent="add">
                 <div class="form-group">
                     <label class="font-weight-bold">Branch</label>
-                    <select class="form-control" wire:model="branch_id" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+                    <select class="form-control" wire:model="branch_id" >
                         <option disabled selected>Select Branch</option>
                         @foreach ($branches as $branch)
                          <option value="{{ $branch->id }}">{{ $branch->name }} -- ({{$branch->location}})</option>
@@ -45,7 +45,7 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold">Shift Type</label>
-                    <select class="form-control" wire:model="shift_type" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+                    <select class="form-control" wire:model="shift_type" >
                         <option value="0">Fixed</option>
                         <option value="1">Flexiable</option>
                     </select>   
@@ -57,7 +57,7 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold">Start Time</label>
-                    <input type="time" class="form-control" wire:model.lazy="start_time" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+                    <input type="time" class="form-control" wire:model.lazy="start_time" >
                     @error('start_time')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
@@ -66,7 +66,7 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold">End Time</label>
-                    <input type="time" class="form-control" wire:model.lazy="end_time" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset;"></textarea>
+                    <input type="time" class="form-control" wire:model.lazy="end_time" >
                     @error('end_time')
                       <span class="text-danger" role="alert">{{$message}}</span>
                     @enderror
@@ -76,7 +76,7 @@
 
                 <div class="form-group" wire:ignore>
                     <label class="font-weight-bold">Weekly Holiday</label>
-                    <select class="form-control select2" multiple="mulitple"  id="mselect2" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgb(0 0 0 / 8%) inset">
+                    <select class="form-control select2" multiple="mulitple"  id="mselect2" >
                         <option value="friday">Friday</option>
                         <option value="saturday">Saturday</option>
                         <option value="sunday">Sunday</option>

@@ -19,7 +19,7 @@
   </head>
 
   <body class="nav-md">
-    <div class="container body">
+    <div class="container body" >
       <div class="main_container">
 
         <!-- main sidebar -->
@@ -35,7 +35,7 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" style="background: silver !important;">
           @yield('content')
         </div>
         <!-- /page content -->

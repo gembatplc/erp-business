@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\LeaveType;
+namespace App\Http\Livewire\Leave\LeaveType;
 
 use Livewire\Component;
 use App\Models\LeaveType;
-use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
 class ListLeaveType extends Component
 {
-
     use WithPagination;
     protected $listeners = ['refreshLeaveType' => '$refresh'];
     protected $paginationTheme = 'bootstrap';
@@ -173,9 +171,10 @@ class ListLeaveType extends Component
         }
     }
 
+
     public function render()
     {
         $leaveTypes = LeaveType::latest()->where('name', 'like', '%'.$this->search.'%')->paginate($this->per_page);
-        return view('livewire.leave-type.list-leave-type',['leaveTypes' => $leaveTypes]);
+        return view('livewire.leave.leave-type.list-leave-type',['leaveTypes' => $leaveTypes]);
     }
 }

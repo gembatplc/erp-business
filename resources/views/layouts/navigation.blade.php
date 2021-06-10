@@ -1,5 +1,5 @@
 <div class="top_nav">
-    <div class="nav_menu" style="background: #172d44; color:wheat;">
+    <div class="nav_menu shadow-sm" style="background: #ffffff; color:#000000">
         <div class="nav toggle">
           <a id="menu_toggle"><i class="fa fa-bars"></i></a>
         </div>
