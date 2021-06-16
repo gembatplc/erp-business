@@ -60,7 +60,8 @@ use App\Http\Livewire\Warehouse\Warehouse;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/install');
+    // return view('welcome');
 })->name('welcome');
 
 

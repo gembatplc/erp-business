@@ -25,12 +25,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '43546af43edbb5202d1cd229b9ba3f4e48604750',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -473,12 +473,12 @@ private static $installed = array (
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '43546af43edbb5202d1cd229b9ba3f4e48604750',
     ),
     'laravel/sail' => 
     array (
@@ -841,6 +841,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'a395af46999a12006213c0c8346c9445eb31640c',
+    ),
+    'rachidlaasri/laravel-installer' => 
+    array (
+      'pretty_version' => '4.1.0',
+      'version' => '4.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b751b4c23dba893e9a4a12f881a6fd8fa921d228',
     ),
     'ralouphie/getallheaders' => 
     array (

@@ -38,6 +38,7 @@ class ComposerStaticInit68dc6d1265499c61dce50f6b1448db54
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
+        'd7354eb4c8441fbf08eec280b61c7c73' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Helpers/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -97,6 +98,7 @@ class ComposerStaticInit68dc6d1265499c61dce50f6b1448db54
         array (
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
+            'RachidLaasri\\LaravelInstaller\\' => 30,
         ),
         'P' => 
         array (
@@ -333,6 +335,10 @@ class ComposerStaticInit68dc6d1265499c61dce50f6b1448db54
         'Ramsey\\Collection\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
+        ),
+        'RachidLaasri\\LaravelInstaller\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src',
         ),
         'Psy\\' => 
         array (
@@ -630,6 +636,9 @@ class ComposerStaticInit68dc6d1265499c61dce50f6b1448db54
         'App\\Http\\Livewire\\Tax\\CreateTax' => __DIR__ . '/../..' . '/app/Http/Livewire/Tax/CreateTax.php',
         'App\\Http\\Livewire\\Tax\\ListTax' => __DIR__ . '/../..' . '/app/Http/Livewire/Tax/ListTax.php',
         'App\\Http\\Livewire\\Tax\\Tax' => __DIR__ . '/../..' . '/app/Http/Livewire/Tax/Tax.php',
+        'App\\Http\\Livewire\\Variation\\CreateVariation' => __DIR__ . '/../..' . '/app/Http/Livewire/Variation/CreateVariation.php',
+        'App\\Http\\Livewire\\Variation\\ListVariation' => __DIR__ . '/../..' . '/app/Http/Livewire/Variation/ListVariation.php',
+        'App\\Http\\Livewire\\Variation\\Variation' => __DIR__ . '/../..' . '/app/Http/Livewire/Variation/Variation.php',
         'App\\Http\\Livewire\\Warehouse\\CreateWarehouse' => __DIR__ . '/../..' . '/app/Http/Livewire/Warehouse/CreateWarehouse.php',
         'App\\Http\\Livewire\\Warehouse\\ListWarehouse' => __DIR__ . '/../..' . '/app/Http/Livewire/Warehouse/ListWarehouse.php',
         'App\\Http\\Livewire\\Warehouse\\Warehouse' => __DIR__ . '/../..' . '/app/Http/Livewire/Warehouse/Warehouse.php',
@@ -4364,6 +4373,25 @@ class ComposerStaticInit68dc6d1265499c61dce50f6b1448db54
         'Psy\\VersionUpdater\\GitHubChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/GitHubChecker.php',
         'Psy\\VersionUpdater\\IntervalChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/IntervalChecker.php',
         'Psy\\VersionUpdater\\NoopChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/NoopChecker.php',
+        'RachidLaasri\\LaravelInstaller\\Controllers\\DatabaseController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/DatabaseController.php',
+        'RachidLaasri\\LaravelInstaller\\Controllers\\EnvironmentController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/EnvironmentController.php',
+        'RachidLaasri\\LaravelInstaller\\Controllers\\FinalController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/FinalController.php',
+        'RachidLaasri\\LaravelInstaller\\Controllers\\PermissionsController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/PermissionsController.php',
+        'RachidLaasri\\LaravelInstaller\\Controllers\\RequirementsController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/RequirementsController.php',
+        'RachidLaasri\\LaravelInstaller\\Controllers\\UpdateController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/UpdateController.php',
+        'RachidLaasri\\LaravelInstaller\\Controllers\\WelcomeController' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Controllers/WelcomeController.php',
+        'RachidLaasri\\LaravelInstaller\\Events\\EnvironmentSaved' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Events/EnvironmentSaved.php',
+        'RachidLaasri\\LaravelInstaller\\Events\\LaravelInstallerFinished' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Events/LaravelInstallerFinished.php',
+        'RachidLaasri\\LaravelInstaller\\Helpers\\DatabaseManager' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Helpers/DatabaseManager.php',
+        'RachidLaasri\\LaravelInstaller\\Helpers\\EnvironmentManager' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Helpers/EnvironmentManager.php',
+        'RachidLaasri\\LaravelInstaller\\Helpers\\FinalInstallManager' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Helpers/FinalInstallManager.php',
+        'RachidLaasri\\LaravelInstaller\\Helpers\\InstalledFileManager' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Helpers/InstalledFileManager.php',
+        'RachidLaasri\\LaravelInstaller\\Helpers\\MigrationsHelper' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Helpers/MigrationsHelper.php',
+        'RachidLaasri\\LaravelInstaller\\Helpers\\PermissionsChecker' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Helpers/PermissionsChecker.php',
+        'RachidLaasri\\LaravelInstaller\\Helpers\\RequirementsChecker' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Helpers/RequirementsChecker.php',
+        'RachidLaasri\\LaravelInstaller\\Middleware\\canInstall' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Middleware/canInstall.php',
+        'RachidLaasri\\LaravelInstaller\\Middleware\\canUpdate' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Middleware/canUpdate.php',
+        'RachidLaasri\\LaravelInstaller\\Providers\\LaravelInstallerServiceProvider' => __DIR__ . '/..' . '/rachidlaasri/laravel-installer/src/Providers/LaravelInstallerServiceProvider.php',
         'Ramsey\\Collection\\AbstractArray' => __DIR__ . '/..' . '/ramsey/collection/src/AbstractArray.php',
         'Ramsey\\Collection\\AbstractCollection' => __DIR__ . '/..' . '/ramsey/collection/src/AbstractCollection.php',
         'Ramsey\\Collection\\AbstractSet' => __DIR__ . '/..' . '/ramsey/collection/src/AbstractSet.php',

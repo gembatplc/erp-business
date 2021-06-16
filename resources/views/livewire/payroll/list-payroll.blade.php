@@ -52,7 +52,7 @@
                 </div>
             
                 <div class="table-responsive">
-                  <table class="table  table-striped jambo_table bulk_action">
+                  <table class="table table-bordered table-striped jambo_table bulk_action">
                     <thead>
                       <tr class="headings">
                         <th>
